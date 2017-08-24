@@ -87,8 +87,8 @@ No Environment variables can be set.
 | `BACKUPPC_ADMIN_PASS` | The Admin Pass for Logging in |
 | `BACKUPPC_UUID` | The uid for the backuppc user e.g. 10000 |
 | `BACKUPPC_GUID` | The gid for the backuppc user e.g. 10000 |
-| `SMTP_HOST` | The SMTP Host to relay mail through (e.g. smtp.vpn.selfdesign.org) |
-| `SMTP_MAIL_DOMAIN` | The Destination Mail Domain to send email messages to (can be blank e.g. selfdesign.org) |
+| `SMTP_HOST` | The SMTP Host to relay mail through (e.g. smtp.example.org) |
+| `SMTP_MAIL_DOMAIN` | The Destination Mail Domain to send email messages to (can be blank e.g. example.org) |
 
 ## Networking
 
