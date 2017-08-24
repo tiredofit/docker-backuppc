@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+sleep 2
+
+if [ ! -f /tmp/state/10-lighttpd ]; then
+
+        mkdir -p /tmp/state
+	echo 'Initialization Complete' >/tmp/state/10-lighttpd
+fi
+
+echo ''
+echo '** Starting Lighttpd..'
+exec /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -D
