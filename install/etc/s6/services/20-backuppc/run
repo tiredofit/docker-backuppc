@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bash
+
+while [ ! -f /tmp/state/10-* ]
+do
+  sleep 1
+done
+
+	if [ ! -f /tmp/state/20-backuppc ]; then
+
+		mkdir -p /tmp/state/
+		echo 'Initialization Complete' >/tmp/state/20-backuppc
+	    
+	fi
+
+echo ''
+echo '** Starting BackupPC'
+exec s6-setuidgid backuppc /usr/local/BackupPC/bin/BackupPC
+
+

@@ -10,36 +10,35 @@ ENV BACKUPPC_VERSION=4.1.2 \
 RUN apk --no-cache add \
 
 	# Install backuppc build dependencies
-	autoconf \
-	automake \
-	curl \
-	expat \
-	expat-dev \
-	g++ \
-	gcc \
-	git \
-	make \
-	patch \
-	perl \
-	perl-cgi \
-	perl-dev \
-	wget \
+		autoconf \
+		automake \
+		curl \
+		expat \
+		expat-dev \
+		g++ \
+		gcc \
+		git \
+		make \
+		patch \
+		perl \
+		perl-cgi \
+		perl-dev \
+		wget \
 
 	# Install backuppc runtime dependencies
-	apache2-utils \
-	gzip \
-	iputils \
-	lighttpd \
-	lighttpd-mod_auth \
-	msmtp \
-	openssh \
-	openssl \
-	rrdtool \
-	rsync \
-	samba-client \
-        sudo \
-    && \
-	
+		apache2-utils \
+		gzip \
+		iputils \
+		lighttpd \
+		lighttpd-mod_auth \
+		openssh \
+		openssl \
+		rrdtool \
+		rsync \
+		samba-client \
+  	        sudo \
+	        && \
+		
 	# Compile and install needed perl modules
 	mkdir -p /usr/src && \
 	cd /usr/src && \
@@ -94,21 +93,14 @@ RUN apk --no-cache add \
 
 	rm -rf /var/cache/apk/*
 
-## File Copies
-	COPY install/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf
-	ADD install/s6 /etc/s6
-        ADD install/cont-init.d /etc/cont-init.d
-        RUN chmod +x /etc/cont-init.d/*.sh	    
-
+### Add Folders
+   ADD /install /
+   
 ## Zabbix Setup 
-        ADD /install/zabbix  /etc/zabbix
-        RUN chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.pl
+   RUN chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.pl
 
 ## Networking
 	EXPOSE 80
-
-## Volumes
-	VOLUME ["/etc/backuppc", "/home/backuppc", "/var/lib/backuppc"]
 
 ## Entrypoint
     ENTRYPOINT ["/init"]
