@@ -1,3 +1,8 @@
+## 3.1 - 2017-07-04 dave at tiredofit dot ca
+
+* File Cleanup
+* MSMTP Fixup
+
 ## 3.0 - 2017-07-04 dave at tiredofit dot ca
 
 * Rebase with s6

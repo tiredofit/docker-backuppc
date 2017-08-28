@@ -79,7 +79,7 @@ The following directories are used for configuration and can be mapped for persi
 
 ## Environment Variables
 
-No Environment variables can be set.
+Along with the Environment Variables from the [Base image](https://hub.docker.com/r/tiredofit/alpine), below is the complete list of available options that can be used to customize your installation.
 
 | Variable | Description |
 |-----------|-------------|
@@ -87,8 +87,6 @@ No Environment variables can be set.
 | `BACKUPPC_ADMIN_PASS` | The Admin Pass for Logging in |
 | `BACKUPPC_UUID` | The uid for the backuppc user e.g. 10000 |
 | `BACKUPPC_GUID` | The gid for the backuppc user e.g. 10000 |
-| `SMTP_HOST` | The SMTP Host to relay mail through (e.g. smtp.example.org) |
-| `SMTP_MAIL_DOMAIN` | The Destination Mail Domain to send email messages to (can be blank e.g. example.org) |
 
 ## Networking
 
