@@ -1,5 +1,5 @@
 FROM tiredofit/alpine:3.5
-MAINTAINER Dave Conroy <dave at tiredofit dot ca>
+LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ENV BACKUPPC_VERSION=4.1.2 \
     BACKUPPC_XS_VERSION=0.53 \
