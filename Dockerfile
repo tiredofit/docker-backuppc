@@ -5,7 +5,8 @@ ENV BACKUPPC_VERSION=4.1.2 \
     BACKUPPC_XS_VERSION=0.53 \
     PAR2_VERSION=v0.7.0 \
     RSYNC_BPC_VERSION=3.0.9.6 \
-    ZABBIX_HOSTNAME=backuppc-app
+    ZABBIX_HOSTNAME=backuppc-app \
+    ENABLE_SMTP=TRUE
 
 RUN apk --no-cache add \
 
