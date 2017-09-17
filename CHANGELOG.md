@@ -1,3 +1,7 @@
+## 3.2 - 2017-09-17 dave at tiredofit dot ca
+
+* Version Bump & MSMTP Cleanup
+
 ## 3.1 - 2017-07-04 dave at tiredofit dot ca
 
 * File Cleanup
