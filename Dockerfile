@@ -4,7 +4,7 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 ENV BACKUPPC_VERSION=4.1.4 \
     BACKUPPC_XS_VERSION=0.56 \
     PAR2_VERSION=v0.7.0 \
-    RSYNC_BPC_VERSION=3.0.9.6 \
+    RSYNC_BPC_VERSION=3.0.9.8 \
     ZABBIX_HOSTNAME=backuppc-app \
     ENABLE_SMTP=TRUE
 
