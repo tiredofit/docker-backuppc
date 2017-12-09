@@ -2,7 +2,7 @@ FROM tiredofit/alpine:3.5
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ENV BACKUPPC_VERSION=4.1.4 \
-    BACKUPPC_XS_VERSION=0.54 \
+    BACKUPPC_XS_VERSION=0.56 \
     PAR2_VERSION=v0.7.0 \
     RSYNC_BPC_VERSION=3.0.9.6 \
     ZABBIX_HOSTNAME=backuppc-app \
