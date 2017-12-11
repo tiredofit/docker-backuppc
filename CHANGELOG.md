@@ -1,3 +1,8 @@
+## 3.4 - 2017-12-11 <dave at tiredofit dot ca>
+
+* Version Bump to 4.15
+* BackupPCXS to 0.57
+
 ## 3.31 - 2017-12-09 <dave at tiredofit dot ca>
 
 * Update BackupPCXS to 0.56
