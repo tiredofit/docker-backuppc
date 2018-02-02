@@ -1,19 +1,29 @@
-## 3.4 - 2017-12-11 <dave at tiredofit dot ca>
+## 3.5 - 2018-01-23 <dave at tiredofit dot ca>
+
+* Update PAR2 0.80
+* Update Rsync BPC to 3.0.9.11
+* Zabbix Tweaks
+
+## 3.41 - 2017-12-09 <dave at tiredofit dot ca>
+
+* Filesystem Cleanup
+
+## 3.4 - 2017-12-09 <dave at tiredofit dot ca>
 
 * Version Bump to 4.15
-* BackupPCXS to 0.57
+* BackupPC:XS 0.57
 
 ## 3.31 - 2017-12-09 <dave at tiredofit dot ca>
 
-* Update BackupPCXS to 0.56
+* Update BackupXS to 0.56
 
 ## 3.3 - 2017-11-30 <dave at tiredofit dot ca>
 
 * Version bump to 4.14
 
-## 3.2 - 2017-09-17 <dave at tiredofit dot ca>
+## 3.2 - 2017-07-04 <dave at tiredofit dot ca>
 
-* Version Bump & MSMTP Cleanup
+* Version Bump and MSMTP Fixup
 
 ## 3.1 - 2017-07-04 <dave at tiredofit dot ca>
 

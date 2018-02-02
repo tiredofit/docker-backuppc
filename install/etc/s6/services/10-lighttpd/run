@@ -12,5 +12,5 @@ if [ ! -f /tmp/state/10-lighttpd ]; then
 fi
 
 echo ''
-echo '** Starting Lighttpd'
+echo '** [lightttpd] Starting Lighttpd'
 exec /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -D

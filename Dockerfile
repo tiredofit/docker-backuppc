@@ -3,8 +3,8 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ENV BACKUPPC_VERSION=4.1.5 \
     BACKUPPC_XS_VERSION=0.57 \
-    PAR2_VERSION=v0.7.0 \
-    RSYNC_BPC_VERSION=3.0.9.8 \
+    PAR2_VERSION=v0.8.0 \
+    RSYNC_BPC_VERSION=3.0.9.11 \
     ZABBIX_HOSTNAME=backuppc-app \
     ENABLE_SMTP=TRUE
 
@@ -101,7 +101,7 @@ RUN apk --no-cache add \
    RUN chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.pl
 
 ## Networking
-	EXPOSE 80
+   EXPOSE 80
 
 ## Entrypoint
     ENTRYPOINT ["/init"]
