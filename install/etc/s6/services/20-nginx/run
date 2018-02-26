@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv bash
+
+while [ ! -f /tmp/state/10-backuppc ]
+do
+  sleep 1
+done
+
+if [ ! -f /tmp/state/20-nginx ]; then
+    mkdir -p /tmp/state
+	echo 'Initialization Complete' >/tmp/state/20-nginx
+fi
+
+echo ''
+echo '** [nginx] Starting nginx'
+exec nginx

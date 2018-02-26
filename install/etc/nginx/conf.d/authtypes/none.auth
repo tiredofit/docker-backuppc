@@ -1,0 +1,11 @@
+    location / {
+
+        location ~ \.cgi$ {
+            include fastcgi_params;
+            fastcgi_pass unix:/var/run/fcgiwrap.sock;
+
+            fastcgi_param REMOTE_ADDR     $remote_addr;
+            fastcgi_param REMOTE_USER     $remote_user;
+            fastcgi_param SCRIPT_FILENAME /www/cgi-bin/BackupPC/BackupPC_Admin;
+        }
+}

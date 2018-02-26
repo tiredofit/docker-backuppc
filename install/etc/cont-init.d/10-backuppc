@@ -8,7 +8,7 @@
 		adduser -D -S -h /home/backuppc -G backuppc -u ${BACKUPPC_UUID:-1000} backuppc
 		addgroup zabbix backuppc
 		chown backuppc:backuppc /home/backuppc
-                echo '%zabbix ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+        echo '%zabbix ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 		# Generate cryptographic key
 		if [ ! -f /home/backuppc/.ssh/id_rsa ]; then
@@ -32,14 +32,12 @@
 			--install-dir /usr/local/BackupPC \
 	        --log-dir /www/logs/backuppc
 
+        mkdir -p /www/logs/backuppc
+        chown -R backuppc /www/logs/backuppc
+        
 		# Configure WEB UI access
 		sed -ie "s/^\$Conf{CgiAdminUsers}\s*=\s*'\w*'/\$Conf{CgiAdminUsers} = '${BACKUPPC_ADMIN_USER:-backuppc}'/g" /etc/backuppc/config.pl
 		htpasswd -b -c /etc/backuppc/htpasswd ${BACKUPPC_ADMIN_USER:-backuppc} ${BACKUPPC_ADMIN_PASS:-password}
-
-		# Prepare lighttpd
-		mkdir -p /www/logs/lighttpd
-		touch /www/logs/lighttpd/error.log 
-		chown -R backuppc:backuppc /www/logs/lighttpd
 
 		# Configure standard mail delivery parameters (may be overriden by backuppc user-wide config)
 		echo "account default" > /etc/msmtp
@@ -47,8 +45,9 @@
 		echo "auto_from on" >> /etc/msmtp
 		if [ "${SMTP_MAIL_DOMAIN:-}" != "" ]; then
 		       echo "maildomain ${SMTP_MAIL_DOMAIN}" >> /etc/msmtp
-	       	fi
+       	fi
 
 		#Clean
 		rm -rf /usr/src/BackupPC-$BACKUPPC_VERSION.tar.gz /usr/src/BackupPC-$BACKUPPC_VERSION /firstrun
 
+          

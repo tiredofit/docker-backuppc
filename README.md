@@ -4,7 +4,9 @@
 
 Dockerfile to build a [BackupPC](https://backuppc.sourceforge.net/) 4.x (stable) container image.
 
-This Container uses [Alpine 3.5](http://www.alpinelinux.org) as a base, along with served via LIghttpd.
+This Container uses [Alpine 3.7](http://www.alpinelinux.org) as a base, along with served via Nginx. 
+
+* Choice of Authentication Choices (None, Basic, and LemonLDAP:NG Handler)
 
 [Changelog](CHANGELOG.md)
 
@@ -62,7 +64,7 @@ docker-compose up
 
 Point your browser to `https://YOURHOSTNAME
 
-__NOTE__: It is highly recommended this be run through a SSL proxy, with authentication, as by default there is none required!
+__NOTE__: It is highly recommended this be run through a SSL proxy, with authentication enabled.
 
 ## Data-Volumes
 
@@ -83,10 +85,15 @@ Along with the Environment Variables from the [Base image](https://hub.docker.co
 
 | Variable | Description |
 |-----------|-------------|
+| `AUTHENTICATION_TYPE` | Type of Authentication; `NONE`,`BASIC`,`LLNG` Default: `BASIC` |
 | `BACKUPPC_ADMIN_USER` | The Admin User for Logging in |
 | `BACKUPPC_ADMIN_PASS` | The Admin Pass for Logging in |
 | `BACKUPPC_UUID` | The uid for the backuppc user e.g. 10000 |
 | `BACKUPPC_GUID` | The gid for the backuppc user e.g. 10000 |
+| `LLNG_HANDLER_HOST` | For use with LLNG Authentication type. Hostname of Handler |
+| `LLNG_HANDLER_PORT` | For use with LLNG Authentication type. Port of Handler | `SMTP_HOST` | Remote SMTP Host |
+| `SMTP_MAIL_DOMAIN` | Root Mail Domain name for HELO |
+
 
 ## Networking
 

@@ -24,7 +24,9 @@ services:
 
       - BACKUPPC_UUID=10000
       - BACKUPPC_GUID=10000
-     
+      
+      - AUTHENTICATION_TYPE=BASIC
+
       - SMTP_HOST=smtp.example.org
       - SMTP_MAIL_DOMAIN=example.org
     networks:

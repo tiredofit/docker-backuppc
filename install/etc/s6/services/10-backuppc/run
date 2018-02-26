@@ -1,19 +1,18 @@
 #!/usr/bin/with-contenv bash
 
-while [ ! -f /tmp/state/10-* ]
+while [ ! -f /tmp/state/99-container-init ]
 do
   sleep 1
 done
 
-	if [ ! -f /tmp/state/20-backuppc ]; then
+
+	if [ ! -f /tmp/state/10-backuppc ]; then
 
 		mkdir -p /tmp/state/
-		echo 'Initialization Complete' >/tmp/state/20-backuppc
+		echo 'Initialization Complete' >/tmp/state/10-backuppc
 	    
 	fi
 
 echo ''
 echo '** [backuppc] Starting BackupPC'
 exec s6-setuidgid backuppc /usr/local/BackupPC/bin/BackupPC
-
-

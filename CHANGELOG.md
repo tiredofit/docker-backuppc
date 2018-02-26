@@ -1,3 +1,11 @@
+## 4.0 - 2018-02-25 <dave at tiredofit dot ca>
+
+* Switch to Nginx w/fcgiwrap from Lightttpd
+* Update Rsync_BPC to 3.0.9.12
+* Update to Alpine 3.7
+* Add new AUTHENTICATION_TYPE variable for BASIC, LLNG (LemonLDAP:NG) and NONE
+* Cleanup Source
+
 ## 3.5 - 2018-01-23 <dave at tiredofit dot ca>
 
 * Update PAR2 0.80
