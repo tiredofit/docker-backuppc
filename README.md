@@ -56,7 +56,7 @@ docker pull tiredofit/backuppc
 * Set various [environment variables](#environment-variables) to understand the capabilities of this image.
 * Map [persistent storage](#data-volumes) for access to configuration and data files for backup.
 
-Start openldap-fusiondirectory using:
+Start backuppc using:
 
 ```bash
 docker-compose up
