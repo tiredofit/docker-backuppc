@@ -9,7 +9,6 @@ services:
       - /var/local/data/backuppc/conf/etc/:/etc/backuppc
       - /var/local/data/backuppc/conf/home/:/home/backuppc
       - /var/local/data/backuppc/logs:/www/logs
-      - /etc/localtime:/etc/localtime:ro
     environment:
       - VIRTUAL_HOST=backuppc.example.org
       - VIRTUAL_NETWORK=nginx-proxy

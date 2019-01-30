@@ -1,3 +1,27 @@
+## 4.4.1 - 2018-12-11 <dave at tiredofit dot ca>
+
+* Add acl-dev during build process
+* Startup Script cleanup
+
+## 4.4 - 2018-12-11 <dave at tiredofit dot ca>
+
+* BackupPC 4.3.0
+* BackupPCXS 0.58
+* BackupPC Rsync 3.12.0
+
+## 4.3 - 2018-04-15 <dave at tiredofit dot ca>
+
+* Update permissions to write for Nginx
+* Patchup for LLNG Handler Function
+
+## 4.2 - 2018-04-15 <dave at tiredofit dot ca>
+
+* Update BackupPC to 4.2.0
+
+## 4.1 - 2018-03-26 <dave at tiredofit dot ca>
+
+* Add $PORT_NUMBER env variable for changing Nginx Port if using on user_ns: host
+
 ## 4.0 - 2018-02-25 <dave at tiredofit dot ca>
 
 * Switch to Nginx w/fcgiwrap from Lightttpd

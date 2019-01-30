@@ -7,10 +7,10 @@ done
 
 
 	if [ ! -f /tmp/state/10-backuppc ]; then
-
+        cp -R /etc/msmtp /home/backuppc/.msmtprc
 		mkdir -p /tmp/state/
 		echo 'Initialization Complete' >/tmp/state/10-backuppc
-	    
+               	    
 	fi
 
 echo ''

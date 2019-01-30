@@ -4,7 +4,7 @@
 
 Dockerfile to build a [BackupPC](https://backuppc.sourceforge.net/) 4.x (stable) container image.
 
-This Container uses [Alpine 3.7](http://www.alpinelinux.org) as a base, along with served via Nginx. 
+This Container uses [Alpine 3.8](http://www.alpinelinux.org) as a base, along with served via Nginx. 
 
 * Choice of Authentication Choices (None, Basic, and LemonLDAP:NG Handler)
 
@@ -42,7 +42,8 @@ Make sure there is adequate storage available to perform deduplicated backups!
 
 # Installation
 
-Automated builds of the image are available on [Docker Hub](https://tiredofit/backuppc) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/backuppc) and is the recommended method 
+of installation.
 
 
 ```bash
@@ -56,13 +57,13 @@ docker pull tiredofit/backuppc
 * Set various [environment variables](#environment-variables) to understand the capabilities of this image.
 * Map [persistent storage](#data-volumes) for access to configuration and data files for backup.
 
-Start backuppc using:
+Start openldap-fusiondirectory using:
 
 ```bash
 docker-compose up
 ```
 
-Point your browser to `https://YOURHOSTNAME
+Point your browser to `https://YOURHOSTNAME`
 
 __NOTE__: It is highly recommended this be run through a SSL proxy, with authentication enabled.
 

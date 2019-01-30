@@ -5,6 +5,8 @@
   BACKUPPC_ADMIN_USER=${BACKUPPC_ADMIN_USER:-backuppc}
   BACKUPPC_ADMIN_PASS=${BACKUPPC_ADMIN_PASS:-backuppc}
 
+  chown -R backuppc:backuppc /var/tmp/nginx
+
 ### Map Authentication
 
   case "$AUTHENTICATION_TYPE" in
