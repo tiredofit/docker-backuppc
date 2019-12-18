@@ -1,0 +1,12 @@
+      auth_request /lmauth;
+      auth_request_set $lmremote_user $upstream_http_lm_remote_user;
+      auth_request_set $lmlocation $upstream_http_location;
+      auth_request_set $cookie_value $upstream_http_set_cookie;
+      auth_request_set $groups $upstream_http_groups;
+      auth_request_set $givenName $upstream_http_givenname;
+      auth_request_set $mail $upstream_http_mail;
+      auth_request_set $sn $upstream_http_sn;
+      auth_request_set $uid $upstream_http_uid;
+      add_header Set-Cookie $cookie_value;
+      error_page 401 $lmlocation;
+      try_files $uri $uri/ /index.cgi;

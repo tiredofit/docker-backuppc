@@ -1,49 +1,64 @@
-FROM tiredofit/alpine:3.8
+FROM tiredofit/nginx:alpine3.10
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
-ENV BACKUPPC_VERSION=4.3.0 \
-    BACKUPPC_XS_VERSION=0.58 \
+ENV BACKUPPC_VERSION=4.3.1 \
+    BACKUPPC_XS_VERSION=0.59 \
     PAR2_VERSION=v0.8.0 \
-    RSYNC_BPC_VERSION=3.1.2.0 \
+    RSYNC_BPC_VERSION=3.1.2.1 \
+    NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
+    NGINX_USER=backuppc \
+    NGINX_GROUP="" \
     ZABBIX_HOSTNAME=backuppc-app \
     ENABLE_SMTP=TRUE
 
-RUN apk add --no-cache --virtual .backuppc-build-deps \
-	# Install backuppc build dependencies
-		autoconf \
-		automake \
-		acl-dev \
-		build-base \
-		expat-dev \
-		g++ \
-		gcc \
-		git \
-		make \
-		patch \
-		perl-dev \
-		&& \
+RUN set -x && \
+    apk update && \
+    apk upgrade && \
+    apk add -t .backuppc-build-deps \
+			# Install backuppc build dependencies
+				autoconf \
+				automake \
+				acl-dev \
+				build-base \
+				bzip2-dev \
+				expat-dev \
+				g++ \
+				gcc \
+				git \
+				make \
+				patch \
+				perl-dev \
+				&& \
     \
 	# Install backuppc runtime dependencies
-    apk add --no-cache --virtual .backuppc-run-deps \
-		apache2-utils \
-		expat \
-		gzip \
-		fcgiwrap \
-		iputils \
-		nginx \
-		openssh \
-		openssl \
-		perl \
-		perl-archive-zip \
-		perl-cgi \
-		perl-file-listing \
-		perl-xml-rss \
-		rrdtool \
-		rsync \
-		samba-client \
-		spawn-fcgi \
-        sudo \
-        && \
+    apk add -t .backuppc-run-deps \
+				bzip2 \
+				expat \
+				gzip \
+				fcgiwrap \
+				iputils \
+				openssh \
+				openssl \
+				perl \
+				perl-archive-zip \
+				perl-cgi \
+				perl-file-listing \
+				perl-xml-rss \
+				pigz \
+				rrdtool \
+				rsync \
+				samba-client \
+				spawn-fcgi \
+		        sudo \
+		        && \
+		    \
+    \
+    # Compile and install Parallel BZIP
+    mkdir -p /usr/src/pbzip2 && \
+    curl -ssL https://launchpad.net/pbzip2/1.1/1.1.13/+download/pbzip2-1.1.13.tar.gz | tar xvfz - --strip=1 -C /usr/src/pbzip2 && \
+    cd /usr/src/pbzip2 && \
+    make && \
+    make install && \
     \
 	# Compile and install BackupPC:XS
 	cd /usr/src && \
@@ -82,12 +97,12 @@ RUN apk add --no-cache --virtual .backuppc-build-deps \
     \
 	# Cleanup
     apk del .backuppc-build-deps && \
-    rm -rf /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline && \
-    rm -rf /tmp/* /var/cache/apk/* && \
+    rm -rf /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
+    rm -rf /tmp/* && \
 	rm -rf /var/cache/apk/*
 
 ### Add Folders
-ADD /install /
+ADD install/ /
 
 ## Zabbix Setup 
 RUN chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.pl

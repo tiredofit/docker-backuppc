@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bash
+
+while [ ! -f /tmp/state/10-nginx ]
+do
+  sleep 1
+done
+
+### Set Debug Mode
+if [ "$DEBUG_MODE" = "TRUE" ] || [ "$DEBUG_MODE" = "true" ]; then
+    set -x
+fi
+
+if [ ! -f /tmp/state/11-fcgwiwrap ]; then
+    mkdir -p /tmp/state/
+	echo 'Initialization Complete' >/tmp/state/11-fcgiwrap
+fi
+
+echo "** [gcgiwrap] Starting fcgiwrap"
+exec /usr/bin/spawn-fcgi  -s /var/run/fcgiwrap.sock -P /var/run/fcgiwrap.pid -u backuppc -g backuppc -U backuppc -G backuppc -M 660 -n -- /usr/bin/fcgiwrap

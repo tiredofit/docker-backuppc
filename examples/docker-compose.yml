@@ -1,39 +1,37 @@
-version: '2'
-
+version: '3.7'
 services:
+
   backuppc-app:
-    image: tiredofit/backupp
+    image: tiredofit/backuppc
     container_name: backuppc-app
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:backuppc.example.com
+      - traefik.port=80
+      - traefik.protocol=http
+      - traefik.docker.network=proxy
+      - traefik.backend=backuppc-app
     volumes:
-      - /var/local/data/backuppc/data:/var/lib/backuppc
-      - /var/local/data/backuppc/conf/etc/:/etc/backuppc
-      - /var/local/data/backuppc/conf/home/:/home/backuppc
-      - /var/local/data/backuppc/logs:/www/logs
+      - ./data:/var/lib/backuppc
+      - ./conf/etc/:/etc/backuppc
+      - ./conf/home/:/home/backuppc
+      - ./logs:/www/logs
     environment:
-      - VIRTUAL_HOST=backuppc.example.org
-      - VIRTUAL_NETWORK=nginx-proxy
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=backuppc.example.org
-      - LETSENCRYPT_EMAIL=youremail@example.org
-
       - ZABBIX_HOSTNAME=backuppc-app
-     
-      - BACKUPPC_ADMIN_USER=backuppc
-      - BACKUPPC_ADMIN_PASS=password
-
       - BACKUPPC_UUID=10000
       - BACKUPPC_GUID=10000
       
-      - AUTHENTICATION_TYPE=BASIC
-
-      - SMTP_HOST=smtp.example.org
-      - SMTP_MAIL_DOMAIN=example.org
+      - NGINX_AUTHENTICATION_TYPE=BASIC
+      - NGINX_AUTHENTICATION_BASIC_USER1=backuppc
+      - NGINX_AUTHENTICATION_BASIC_PASS1=backuppc
+      - DEBUG_MODE=TRUE
     networks:
-      - proxy-tier
+      - proxy
+      - services
     restart: always
 
 networks:
-  proxy-tier:
-    external:
-      name: nginx-proxy
-
+  proxy:
+    external: true
+  services:
+    external: true

@@ -1,3 +1,35 @@
+## 5.0.0 2019-12-12 <dave at tiredofit dot ca>
+
+   ### Added
+      - Refactored entire image to use tiredofit/nginx as a base
+
+   ### Changed
+      - Reworked authentication mechanisms
+      - Cleaned up code
+
+
+## 4.6 - 2019-07-25 <dave at tiredofit dot ca>
+
+* BackupPC 4.3.1
+* BackupPCXS 0.59
+* BackupPC Rsync 3.1.2.1
+
+## 4.5 - 2019-06-19 <dave at tiredofit dot ca>
+
+* Alpine 3.10
+
+## 4.4.4 - 2019-02-24 <dave at tiredofit dot ca>
+
+* Add some error checking 
+
+## 4.4.3 - 2019-02-24 <dave at tiredofit dot ca>
+
+* Add Debug during build
+
+## 4.4.2 - 2019-02-08 <dave at tiredofit dot ca>
+
+* Bump to Alpine 3.9
+
 ## 4.4.1 - 2018-12-11 <dave at tiredofit dot ca>
 
 * Add acl-dev during build process
