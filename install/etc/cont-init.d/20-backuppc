@@ -1,25 +1,15 @@
 #!/usr/bin/with-contenv bash
 
-silent() {
-  if [ "$DEBUG_MODE" = "TRUE" ] || [ "$DEBUG_MODE" = "true" ];  then
-    "$@"
-  else
-    "$@" > /dev/null 2>&1
-  fi
-}
-
-### Set Debug Mode
-if [ "$DEBUG_MODE" = "TRUE" ] || [ "$DEBUG_MODE" = "true" ]; then
-    set -x
-fi
+source /assets/functions/*
+PROCESS_NAME="backuppc"
 
 ### Set Defaults
 BACKUPPC_ADMIN_USER=${BACKUPPC_ADMIN_USER:-"backuppc"}
 BACKUPPC_UUID=${BACKUPPC_UUID:-1000}
 BACKUPPC_GUID=${BACKUPPC_GUID:-1000}
 
-echo "** [backuppc] First run of the container. BackupPC will be installed."
-echo "** [backuppc] If exist, configuration and data will be reused and upgraded as needed."
+print_warn "First run of the container. BackupPC will be installed."
+print_warn "If exist, configuration and data will be reused and upgraded as needed."
 
 # Create backuppc user
 addgroup -S -g "${BACKUPPC_GUID}" backuppc
@@ -61,5 +51,5 @@ sed -ie "s/^\$Conf{CgiAdminUsers}\s*=\s*'\w*'/\$Conf{CgiAdminUsers} = 'backuppc'
 
 rm -rf /usr/src/BackupPC-"${BACKUPPC_VERSION}".tar.gz /usr/src/BackupPC-"${BACKUPPC_VERSION}" /firstrun
 
-echo "** [backuppc] Container initialization complete"
-touch /tmp/state/09-init-backuppc
+print_info "Container initialization complete"
+liftoff

@@ -1,3 +1,8 @@
+## 5.1.0 2019-12-29 <dave at tiredofit dot ca>
+
+   ### Added
+      - Changes to support new tiredofit/alpine base
+
 ## 5.0.0 2019-12-12 <dave at tiredofit dot ca>
 
    ### Added
