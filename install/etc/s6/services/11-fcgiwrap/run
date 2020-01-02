@@ -1,12 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-while [ ! -f /tmp/state/10-nginx ]
-do
-  sleep 1
-done
-
-source /assets/functions/*
+for s in /assets/functions/*; do source $s; done
 PROCESS_NAME="fcgiwrap"
+
+check_container_initialized
+check_service_initialized init 10-nginx
 liftoff
 
 print_info "Starting fcgiwrap"

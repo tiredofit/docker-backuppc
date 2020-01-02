@@ -1,12 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-while [ ! -f /tmp/state/11-fcgiwrap ]
-do
-  sleep 1
-done
-
-source /assets/functions/*
+for s in /assets/functions/*; do source $s; done
 PROCESS_NAME="backuppc"
+
+check_container_initialized
+check_service_initialized init 11-fcgiwrap
 cp -R /etc/msmtp /home/backuppc/.msmtprc
 liftoff
 
