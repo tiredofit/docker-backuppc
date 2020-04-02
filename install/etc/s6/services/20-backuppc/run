@@ -4,8 +4,8 @@ for s in /assets/functions/*; do source $s; done
 PROCESS_NAME="backuppc"
 
 check_container_initialized
-check_service_initialized init 11-fcgiwrap
-cp -R /etc/msmtp /home/backuppc/.msmtprc
+check_service_initialized 11-fcgiwrap
+cp -R /etc/msmtprc /home/backuppc/.msmtprc
 liftoff
 
 print_info "Starting BackupPC ${BACKUPPC_VERSION}"

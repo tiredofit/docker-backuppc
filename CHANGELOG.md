@@ -1,3 +1,26 @@
+## 5.1.5 2020-03-16 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Update msmtp configuration
+
+
+## 5.1.4 2020-03-09 <dave at tiredofit dot ca>
+
+   ### Added
+      - BackupPC 4.3.2
+
+
+## 5.1.3 2020-01-20 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add ttf-dejavu package to properly generate graphs
+
+## 5.1.2 2020-01-13 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change to allow BackupPC process to execute properly
+
+
 ## 5.1.1 2020-01-02 <dave at tiredofit dot ca>
 
    ### Changed
