@@ -1,10 +1,10 @@
 # hub.docker.com/r/sunnybear/backuppc
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
+[![Build Status](https://img.shields.io/docker/build/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
 [![Docker Stars](https://img.shields.io/docker/stars/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
 [![Docker 
-Layers](https://images.microbadger.com/badges/image/tiredofit/backuppc.svg)](https://microbadger.com/images/sunnybear/backuppc)
+Layers](https://images.microbadger.com/badges/image/sunnybear/backuppc.svg)](https://microbadger.com/images/sunnybear/backuppc)
 # Introduction
 
 Dockerfile to build a [BackupPC](https://backuppc.github.io/backuppc/) 4.4 (stable) container image.
