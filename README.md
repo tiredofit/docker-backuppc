@@ -1,24 +1,22 @@
 # hub.docker.com/r/tiredofit/backuppc
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
+[![Build Status](https://img.shields.io/docker/build/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
+[![Docker Pulls](https://img.shields.io/docker/pulls/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
+[![Docker Stars](https://img.shields.io/docker/stars/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
 [![Docker 
-Layers](https://images.microbadger.com/badges/image/tiredofit/backuppc.svg)](https://microbadger.com/images/tiredofit/backuppc)
-
-
+Layers](https://images.microbadger.com/badges/image/sunnybear/backuppc.svg)](https://microbadger.com/images/sunnybear/backuppc)
 # Introduction
 
-Dockerfile to build a [BackupPC](https://backuppc.github.io/backuppc/) 4.x (stable) container image.
+Dockerfile to build a [BackupPC](https://backuppc.github.io/backuppc/) 4.4 (stable) container image.
 
-This Container uses [Alpine 3.10](http://www.alpinelinux.org) and [tiredofit/nginx](https://github.com/tiredofit/docker-nginx)
+This Container uses [Alpine 3.12](http://www.alpinelinux.org) and [tiredofit/nginx](https://github.com/tiredofit/docker-nginx)
 
 
 [Changelog](CHANGELOG.md)
 
 # Authors
 
-- [Dave Conroy](https://github.com/tiredofit)
+- [sun-bear](https://github.com/sun-bear)
 
 # Table of Contents
 
@@ -48,11 +46,11 @@ Make sure there is adequate storage available to perform deduplicated backups!
 
 # Installation
 
-Automated builds of the image are available on [Docker Hub](https://tiredofit/r/backuppc) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://sunnybear/r/backuppc) and is the recommended method of installation.
 
 
 ```bash
-docker pull tiredofit/backuppc
+docker pull sunnybear/backuppc
 ```
 
 # Quick Start
@@ -78,7 +76,7 @@ The following directories are used for configuration and can be mapped for persi
 
 | Directory | Description |
 |-----------|-------------|
-| `/var/lib/backuppc` | The backed up Data |
+| `/data/backuppc` | The backed up Data |
 | `/etc/backuppc` | Configuration Files |
 | `/home/backuppc` | Home Directory for Backuppc (SSH Keys) |
 | `/www/logs` | Logfiles for Nginx, Supervisord, BackupPC, Zabbix |
@@ -91,8 +89,8 @@ Along with the Environment Variables from the [Base image](https://hub.docker.co
 
 | Variable | Description |
 |-----------|-------------|
-| `BACKUPPC_UUID` | The uid for the backuppc user e.g. 10000 |
-| `BACKUPPC_GUID` | The gid for the backuppc user e.g. 10000 |
+| `BACKUPPC_UUID` | The uid for the backuppc user e.g. 1000 |
+| `BACKUPPC_GUID` | The gid for the backuppc user e.g. 1000 |
 
 *Authentication*
 
