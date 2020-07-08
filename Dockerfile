@@ -1,10 +1,10 @@
-FROM tiredofit/nginx:alpine-3.11
+FROM tiredofit/nginx:alpine-3.12
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
-ENV BACKUPPC_VERSION=4.3.2 \
-    BACKUPPC_XS_VERSION=0.59 \
+ENV BACKUPPC_VERSION=4.4.0 \
+    BACKUPPC_XS_VERSION=0.62 \
     PAR2_VERSION=v0.8.0 \
-    RSYNC_BPC_VERSION=3.1.2.1 \
+    RSYNC_BPC_VERSION=3.1.2.2 \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \

@@ -1,3 +1,12 @@
+## 5.2.1 2020-07-08 <dave at tiredofit dot ca>
+
+   ### Added
+      - BackupPC 4.40
+      - BackupPC_XS 0.62
+      - Rsync BPC 3.12.2
+      - Alpine 3.12
+
+
 ## 5.2.0 2020-06-08 <dave at tiredofit dot ca>
 
    ### Added
