@@ -19,27 +19,33 @@ addgroup zabbix backuppc
 chown backuppc:backuppc /home/backuppc
 echo '%zabbix ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Generate cryptographic key
+# # Generate cryptographic key
 if [ ! -f /home/backuppc/.ssh/id_rsa ]; then
 	su backuppc -s /bin/sh -c "ssh-keygen -t rsa -N '' -f /home/backuppc/.ssh/id_rsa"
 fi
 
-# Extract BackupPC
+# # Extract BackupPC
 cd /usr/src
 tar xf BackupPC-"${BACKUPPC_VERSION}".tar.gz
 cd /usr/src/BackupPC-"${BACKUPPC_VERSION}"
 
-# Install BackupPC (existing configuration will be reused and upgraded)
+# # Install BackupPC (existing configuration will be reused and upgraded)
 silent perl configure.pl \
 	--batch \
-	--config-dir /etc/backuppc \
+	# --config-dir /etc/backuppc \
+    --config-dir "${BPC_CONFIG}" \
 	--cgi-dir /www/cgi-bin/BackupPC \
-	--data-dir /var/lib/backuppc \
+	# --data-dir /var/lib/backuppc \
+    --data-dir "${BPC_DATA}" \
 	--hostname localhost \
+    # --hostname backuppc \
+    # --hostname "${HOSTNAME}" \
 	--html-dir /www/html/BackupPC \
 	--html-dir-url /BackupPC \
-	--install-dir /usr/local/BackupPC \
-    --log-dir /www/logs/backuppc
+	# --install-dir /usr/local/BackupPC \
+    --install-dir "${BPC_INSTALL}" \
+    # --log-dir /www/logs/backuppc
+    --log-dir "${BPC_LOGS}" \
 
 mkdir -p /www/logs/backuppc
 chown -R backuppc /www/logs/backuppc
@@ -47,7 +53,7 @@ if [ -d /etc/BackupPC ]; then
 	chown -R backuppc /etc/BackupPC
 fi
 
-# Configure Web UI access
+# # Configure Web UI access
 sed -ie "s/^\$Conf{CgiAdminUsers}\s*=\s*'\w*'/\$Conf{CgiAdminUsers} = 'backuppc'/g" /etc/backuppc/config.pl
 
 rm -rf /usr/src/BackupPC-"${BACKUPPC_VERSION}".tar.gz /usr/src/BackupPC-"${BACKUPPC_VERSION}" /firstrun
