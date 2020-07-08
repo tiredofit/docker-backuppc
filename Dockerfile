@@ -22,11 +22,9 @@ ENV BACKUPPC_VERSION=4.4.0 \
 
 # # Install backuppc build dependencies
 RUN set -x && \
-
     apk update && \
     apk upgrade && \
     apk add -t .backuppc-build-deps \
-
         autoconf \
         automake \
         acl-dev \
@@ -40,17 +38,6 @@ RUN set -x && \
         patch \
         perl-dev \
         curl
-
-        rsync tar bash shadow git \
-        perl perl-dev perl-archive-zip perl-xml-rss perl-cgi perl-file-listing perl-json-xs \
-        # backuppc \
-        supervisor \
-        openssl curl ca-certificates \
-        expat samba-client iputils openssh rrdtool ttf-dejavu \
-        msmtp lighttpd lighttpd-mod_auth  tzdata libstdc++ libgomp \
-        spawn-fcgi fcgiwrap pigz net-tools htop nano sudo vim  \
-        apache2 apache2-utils \
-        ssmtp \
 
 # # Install backuppc runtime dependencies
 RUN apk add -t .backuppc-run-deps \
