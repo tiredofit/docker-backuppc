@@ -1,4 +1,5 @@
-# hub.docker.com/r/sunnybear/backuppc
+![BackupPC Logo](https://backuppc.github.io/backuppc/images/logos/logo320.png)
+# sun-bear/backuppc-tiredofit
 
 [![Build Status](https://img.shields.io/docker/build/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sunnybear/backuppc.svg)](https://hub.docker.com/r/sunnybear/backuppc)
