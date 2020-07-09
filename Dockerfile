@@ -6,7 +6,7 @@ ENV BACKUPPC_VERSION=4.4.0 \
     BACKUPPC_XS_VERSION=0.62 \
     PAR2_VERSION=v0.8.1 \
     RSYNC_BPC_VERSION=3.1.2.2 \
-    NGINX_ENABLE_CREATE_SAMPLE_HTML=TRUE \
+    NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
     # BPC_HOME=/home/backuppc \
@@ -35,10 +35,10 @@ RUN set -x && \
         make \
         patch \
         perl-dev \
-        curl
+        curl && \
 
 # # Install backuppc runtime dependencies
-RUN apk add -t .backuppc-run-deps \
+    apk add -t .backuppc-run-deps \
         bzip2 \
         expat \
         gzip \
@@ -62,7 +62,6 @@ RUN apk add -t .backuppc-run-deps \
         bash \
         git \
         supervisor \
-        openssl \
         curl \
         msmtp \
         net-tools \
@@ -110,6 +109,9 @@ RUN curl -o /usr/src/BackupPC-$BACKUPPC_VERSION.tar.gz -L https://github.com/bac
     # # Prepare backuppc home
     mkdir -p /home/backuppc && \
     \
+    # # This is required to load images on /
+    # sed -i "s/^\$Conf{CgiImageDirURL} =.*/\$Conf{CgiImageDirURL} = '\/image';/g" /etc/backuppc/config.pl && \
+    \
     # # Mark the docker as not runned yet, to allow entrypoint to do its stuff
     touch /firstrun && \
     \
@@ -118,6 +120,7 @@ RUN curl -o /usr/src/BackupPC-$BACKUPPC_VERSION.tar.gz -L https://github.com/bac
     rm -rf /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/*
+
 
 # ### Add Folders
 ADD install/ /
