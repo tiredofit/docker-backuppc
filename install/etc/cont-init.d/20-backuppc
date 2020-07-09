@@ -35,7 +35,7 @@ silent perl configure.pl \
 	--config-dir /etc/backuppc \
 	--cgi-dir /www/cgi-bin/BackupPC \
 	--data-dir /var/lib/backuppc \
-	--hostname localhost \
+	# --hostname localhost \
 	--hostname "$HOSTNAME" \
 	--html-dir /www/html/BackupPC \
 	--html-dir-url /BackupPC \
