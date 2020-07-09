@@ -33,19 +33,19 @@ cd /usr/src/BackupPC-"${BACKUPPC_VERSION}"
 silent perl configure.pl \
 	--batch \
 	# --config-dir /etc/backuppc \
-    --config-dir "${BPC_CONFIG}" \
+    --config-dir /etc/backuppc \
 	--cgi-dir /www/cgi-bin/BackupPC \
 	# --data-dir /var/lib/backuppc \
-    --data-dir "${BPC_DATA}" \
+    --data-dir /data/backuppc \
 	--hostname localhost \
     # --hostname backuppc \
     # --hostname "${HOSTNAME}" \
 	--html-dir /www/html/BackupPC \
 	--html-dir-url /BackupPC \
 	# --install-dir /usr/local/BackupPC \
-    --install-dir "${BPC_INSTALL}" \
+    --install-dir /usr/local/backuppc \
     # --log-dir /www/logs/backuppc
-    --log-dir "${BPC_LOGS}" \
+    --log-dir /www/logs/backuppc \
 
 mkdir -p /www/logs/backuppc
 chown -R backuppc /www/logs/backuppc
