@@ -115,7 +115,7 @@ RUN curl -o /usr/src/BackupPC-$BACKUPPC_VERSION.tar.gz -L https://github.com/bac
     \
     # # CLEANUP
     apk del .backuppc-build-deps && \
-    # rm -rf /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
+    rm -rf /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/*
 
