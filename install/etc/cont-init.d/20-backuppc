@@ -1,1 +1,57 @@
-/var/lib/backuppc
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service
+PROCESS_NAME="backuppc"
+
+### Set Defaults
+BACKUPPC_ADMIN_USER=${BACKUPPC_ADMIN_USER:-"backuppc"}
+BACKUPPC_UUID=${BACKUPPC_UUID:-1000}
+BACKUPPC_GUID=${BACKUPPC_GUID:-1000}
+
+print_warn "First run of the container. BackupPC will be installed."
+print_warn "If exist, configuration and data will be reused and upgraded as needed."
+
+# Create backuppc user
+addgroup -S -g "${BACKUPPC_GUID}" backuppc
+adduser -D -S -h /home/backuppc -G backuppc -u "${BACKUPPC_UUID}" backuppc
+addgroup zabbix backuppc
+chown backuppc:backuppc /home/backuppc
+echo '%zabbix ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# # Generate cryptographic key
+if [ ! -f /home/backuppc/.ssh/id_rsa ]; then
+	su backuppc -s /bin/sh -c "ssh-keygen -t rsa -N '' -f /home/backuppc/.ssh/id_rsa"
+fi
+
+# # Extract BackupPC
+cd /usr/src
+tar xf BackupPC-"${BACKUPPC_VERSION}".tar.gz
+cd /usr/src/BackupPC-"${BACKUPPC_VERSION}"
+
+# # Install BackupPC (existing configuration will be reused and upgraded)
+silent perl configure.pl \
+	--batch \
+	--config-dir /etc/backuppc \
+	--cgi-dir /www/cgi-bin/BackupPC \
+	--data-dir /var/lib/backuppc \
+	--hostname localhost \
+	--hostname "$HOSTNAME" \
+	--html-dir /www/html/BackupPC \
+	--html-dir-url /BackupPC \
+	--install-dir /usr/local/BackupPC \
+    --log-dir /www/logs/backuppc
+
+mkdir -p /www/logs/backuppc
+chown -R backuppc /www/logs/backuppc
+if [ -d /etc/BackupPC ]; then
+	chown -R backuppc /etc/BackupPC
+fi
+
+# # Configure Web UI access
+sed -ie "s/^\$Conf{CgiAdminUsers}\s*=\s*'\w*'/\$Conf{CgiAdminUsers} = 'backuppc'/g" /etc/backuppc/config.pl
+
+rm -rf /usr/src/BackupPC-"${BACKUPPC_VERSION}".tar.gz /usr/src/BackupPC-"${BACKUPPC_VERSION}" /firstrun
+
+print_info "Container initialization complete"
+liftoff
