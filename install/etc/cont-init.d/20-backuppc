@@ -33,10 +33,10 @@ cd /usr/src/BackupPC-"${BACKUPPC_VERSION}"
 silent perl configure.pl \
 	--batch \
 	--config-dir /etc/backuppc \
-	--cgi-dir /www/cgi-bin/BackupPC \
+	--cgi-dir /var/www/cgi-bin/BackupPC \
 	--data-dir /data/backuppc \
 	--hostname "$HOSTNAME" \
-	--html-dir /www/html/BackupPC \
+	--html-dir /var/www/html/BackupPC \
 	--html-dir-url /BackupPC \
 	--install-dir /usr/local/BackupPC \
     --log-dir /www/logs/backuppc
