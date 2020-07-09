@@ -6,16 +6,16 @@ ENV BACKUPPC_VERSION=4.4.0 \
     BACKUPPC_XS_VERSION=0.62 \
     PAR2_VERSION=v0.8.1 \
     RSYNC_BPC_VERSION=3.1.2.2 \
-    NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
+    NGINX_ENABLE_CREATE_SAMPLE_HTML=TRUE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
-    BPC_HOME=/home/backuppc \
-    BPC_DATA=/data/backuppc \
-    BPC_CONFIG=/etc/backuppc \
-    BPC_INSTALL=/usr/local/BackupPC \
-    # BPC_LOGS=/var/log/backuppc \
-    BPC_LOGS=/www/logs/backuppc \
-    ZABBIX_HOSTNAME=backuppc-app \
+    # BPC_HOME=/home/backuppc \
+    # BPC_DATA=/data/backuppc \
+    # BPC_CONFIG=/etc/backuppc \
+    # BPC_INSTALL=/usr/local/BackupPC \
+    # # BPC_LOGS=/var/log/backuppc \
+    # BPC_LOGS=/www/logs/backuppc \
+    ZABBIX_HOSTNAME=backuppc \
     ENABLE_SMTP=TRUE
 
 # # Install backuppc build dependencies
