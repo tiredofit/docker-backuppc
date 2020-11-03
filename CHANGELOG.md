@@ -1,3 +1,9 @@
+## 5.2.2 2020-11-03 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update rsync-bpc to 3.13.0
+
+
 ## 5.2.1 2020-07-08 <dave at tiredofit dot ca>
 
    ### Added
