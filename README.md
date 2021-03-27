@@ -1,6 +1,5 @@
 # hub.docker.com/r/tiredofit/backuppc
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
 [![Docker

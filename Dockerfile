@@ -1,4 +1,4 @@
-FROM tiredofit/nginx:alpine-3.12
+FROM tiredofit/nginx:alpine-3.13
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ENV BACKUPPC_VERSION=4.4.0 \
