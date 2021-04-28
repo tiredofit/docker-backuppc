@@ -1,3 +1,12 @@
+## 5.3.0 2021-04-28 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add ed25519 SSH client key
+
+   ### Changed
+      - Add smoke test for testing if smtp is enabled/disabled
+
+
 ## 5.2.5 2021-04-28 <dave at tiredofit dot ca>
 
    ### Changed

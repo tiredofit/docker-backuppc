@@ -7,7 +7,6 @@ PROCESS_NAME="backuppc"
 
 check_container_initialized
 check_service_initialized 11-fcgiwrap
-cp -R /etc/msmtprc /home/backuppc/.msmtprc
 liftoff
 
 print_info "Starting BackupPC ${BACKUPPC_VERSION}"

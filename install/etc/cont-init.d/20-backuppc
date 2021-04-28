@@ -4,24 +4,26 @@ source /assets/functions/00-container
 prepare_service
 PROCESS_NAME="backuppc"
 
-### Set Defaults
-BACKUPPC_ADMIN_USER=${BACKUPPC_ADMIN_USER:-"backuppc"}
-BACKUPPC_UUID=${BACKUPPC_UUID:-1000}
-BACKUPPC_GUID=${BACKUPPC_GUID:-1000}
-
-print_warn "First run of the container. BackupPC will be installed."
-print_warn "If exist, configuration and data will be reused and upgraded as needed."
+print_notice "First run of the container. BackupPC will be installed."
+print_notice "If exist, configuration and data will be reused and upgraded as needed."
 
 # Create backuppc user
 addgroup -S -g "${BACKUPPC_GUID}" backuppc
 adduser -D -S -h /home/backuppc -G backuppc -u "${BACKUPPC_UUID}" backuppc
 addgroup zabbix backuppc
+mkdir -p /home/backuppc
 chown backuppc:backuppc /home/backuppc
 echo '%zabbix ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Generate cryptographic key
+# Generate cryptographic keys
 if [ ! -f /home/backuppc/.ssh/id_rsa ]; then
-	su backuppc -s /bin/sh -c "ssh-keygen -t rsa -N '' -f /home/backuppc/.ssh/id_rsa"
+    print_notice "Creating RSA SSH key"
+	su backuppc -s /bin/sh -c "ssh-keygen -t rsa -b 4096 -N '' -f /home/backuppc/.ssh/id_rsa"
+fi
+
+if [ ! -f /home/backuppc/.ssh/id_ed25519 ]; then
+    print_notice "Creating ed25519 SSH key"
+	su backuppc -s /bin/sh -c "ssh-keygen -t ed25519 -o -a 100 -q -N '' -f /home/backuppc/.ssh/id_ed25519"
 fi
 
 # Extract BackupPC
@@ -43,6 +45,11 @@ silent perl configure.pl \
 
 mkdir -p /www/logs/backuppc
 chown -R backuppc /www/logs/backuppc
+
+if [ -f "/etc/msmtprc" ] ; then
+	cp -R /etc/msmtprc /home/backuppc/.msmtprc
+fi
+
 if [ -d /etc/BackupPC ]; then
 	chown -R backuppc /etc/BackupPC
 fi
