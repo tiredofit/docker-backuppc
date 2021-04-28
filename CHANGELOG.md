@@ -1,3 +1,9 @@
+## 5.2.5 2021-04-28 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Permissions fix on script execution
+
+
 ## 5.2.4 2021-04-28 <dave at tiredofit dot ca>
 
    ### Changed
