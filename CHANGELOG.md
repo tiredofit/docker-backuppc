@@ -1,3 +1,9 @@
+## 5.2.4 2021-04-28 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Permissions fix on script
+
+
 ## 5.2.3 2021-03-26 <dave at tiredofit dot ca>
 
    ### Added

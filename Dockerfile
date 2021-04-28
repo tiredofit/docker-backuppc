@@ -104,8 +104,5 @@ RUN set -x && \
 ### Add Folders
 ADD install/ /
 
-## Zabbix Setup 
-RUN chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.pl
-
 ## Networking
 EXPOSE 80
