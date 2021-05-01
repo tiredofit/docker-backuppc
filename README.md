@@ -36,7 +36,7 @@ Make sure there is adequate storage available to perform deduplicated backups!
 
 # Installation
 
-Automated builds of the image are available on [Docker Hub](https://tiredofit/r/backuppc) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://hub.docker.rom/r/tiredofit/backuppc) and is the recommended method of installation.
 
 ```bash
 docker pull tiredofit/backuppc
