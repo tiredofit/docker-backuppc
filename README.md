@@ -9,16 +9,10 @@
 
 * * *
 
-# Introduction
+## About
+This will build a Docker image for [BackupPC](https://backuppc.github.io/backuppc/) - A backup system.
 
-Dockerfile to build a [BackupPC](https://backuppc.github.io/backuppc/) 4.x (stable) container image.
-
-This Container uses [Alpine 3.12](http://www.alpinelinux.org) and [tiredofit/nginx](https://github.com/tiredofit/docker-nginx)
-
-[Changelog](CHANGELOG.md)
-
-# Authors
-
+## Maintainer
 - [Dave Conroy](https://github.com/tiredofit)
 
 # Table of Contents
@@ -52,14 +46,14 @@ docker pull tiredofit/backuppc:(imagetag)
 
 The following image tags are available along with their taged release based on what's written in the [Changelog](CHANGELOG.md):
 
-| Container OS |Tag           |
-| ----------- | ----------- |
-| Alpine      | `:latest` |
+| Container OS | Tag       |
+| ------------ | --------- |
+| Alpine       | `:latest` |
 
 ## Configuration
 
 
-# Quick Start
+### Quick Start
 
 - The quickest way to get started is using [docker-compose](https://docs.docker.com/compose/). See the examples folder for a working [docker-compose.yml](examples/docker-compose.yml) that can be modified for development or production use.
 
@@ -92,8 +86,8 @@ Be sure to view the following repositories to understand all the customizable op
 | [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
 | [Nginx](https://github.com/tiredofit/docker-nginx/)    | Nginx webserver                        |
 
-| Variable        | Description                              |
-| --------------- | ---------------------------------------- |
+| Variable        | Description                                |
+| --------------- | ------------------------------------------ |
 | `BACKUPPC_UUID` | The uid for the backuppc user e.g. `10000` |
 | `BACKUPPC_GUID` | The gid for the backuppc user e.g. `10000` |
 
@@ -132,8 +126,9 @@ NGINX_AUTHENTICATION_BASIC_PASS1=backuppc
 
 When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit any `$` chracters from your string. It will be added in upon container startup. Example:
 `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1=HTTP_AUTH_USER,uid,upstream_http_uid` will get converted into `HTTP_AUTH_USER,$uid,$upstream_http_uid` and get placed in the appropriate areas in the configuration.
+* * *
 
-## Networking
+### Networking
 
 The following ports are exposed and available to public interfaces
 
@@ -171,10 +166,6 @@ These images were built to serve a specific need in a production environment and
 
 ## License
 MIT. See [LICENSE](LICENSE) for more details.
-
-## References
-
-- <https://www.bookstackapp.com/docs>
 
 # References
 
