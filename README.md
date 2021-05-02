@@ -1,9 +1,13 @@
-# hub.docker.com/r/tiredofit/backuppc
+# github.com/tiredofit/docker-backuppc
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/backuppc.svg)](https://hub.docker.com/r/tiredofit/backuppc)
-[![Docker
-Layers](https://images.microbadger.com/badges/image/tiredofit/backuppc.svg)](https://microbadger.com/images/tiredofit/backuppc)
+[![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-backuppc?style=flat-square)](https://github.com/tiredofit/docker-backuppc/releases/latest)
+[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-backuppc/build?style=flat-square)](https://github.com/tiredofit/docker-backuppc/actions?query=workflow%3Abuild)
+[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/backuppc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/backuppc/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/backuppc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/backuppc/)
+[![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
+[![Paypal Donate](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square)](https://www.paypal.me/tiredofit)
+
+* * *
 
 # Introduction
 
@@ -26,21 +30,34 @@ This Container uses [Alpine 3.12](http://www.alpinelinux.org) and [tiredofit/ngi
 - [Maintenance](#maintenance)
   - [Shell Access](#shell-access)
 
-# Prerequisites
+## Prerequisites and Assumptions
+*  Assumes you are using some sort of SSL terminating reverse proxy such as:
+   *  [Traefik](https://github.com/tiredofit/docker-traefik)
+   *  [Nginx](https://github.com/jc21/nginx-proxy-manager)
+   *  [Caddy](https://github.com/caddyserver/caddy)
+* Make sure there is adequate storage available to perform deduplicated backups!
 
-None
 
-# Dependencies
+## Installation
 
-Make sure there is adequate storage available to perform deduplicated backups!
+### Build from Source
+Clone this repository and build the image with `docker build <arguments> (imagename) .`
 
-# Installation
-
-Automated builds of the image are available on [Docker Hub](https://hub.docker.rom/r/tiredofit/backuppc) and is the recommended method of installation.
+### Prebuilt Images
+Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/backuppc) and is the recommended method of installation.
 
 ```bash
-docker pull tiredofit/backuppc
+docker pull tiredofit/backuppc:(imagetag)
 ```
+
+The following image tags are available along with their taged release based on what's written in the [Changelog](CHANGELOG.md):
+
+| Container OS |Tag           |
+| ----------- | ----------- |
+| Alpine      | `:latest` |
+
+## Configuration
+
 
 # Quick Start
 
@@ -48,20 +65,10 @@ docker pull tiredofit/backuppc
 
 - Set various [environment variables](#environment-variables) to understand the capabilities of this image.
 - Map [persistent storage](#data-volumes) for access to configuration and data files for backup.
+- Enter inside the container and as user `backuppc` `ssh-copy-id` your public keys to a remote host
+- Visit your Web interface
 
-Start backuppc using:
-
-```bash
-docker-compose up
-```
-
-Point your browser to `https://YOURHOSTNAME`
-
-**NOTE**: It is highly recommended this be run through a SSL proxy, with authentication enabled.
-
-## Configuration
-
-### Data-Volumes
+### Persistent Storage
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
@@ -74,14 +81,23 @@ The following directories are used for configuration and can be mapped for persi
 
 ### Environment Variables
 
-Along with the Environment Variables from the [Base image](https://hub.docker.com/r/tiredofit/alpine) and the [Nginx image](https://hub.docker.com/r/tiredofit/nginx) , below is the complete list of available options that can be used to customize your installation.
+#### Base Images used
+
+This image relies on an [Alpine Linux](https://hub.docker.com/r/tiredofit/alpine) or [Debian Linux](https://hub.docker.com/r/tiredofit/debian) base image that relies on an [init system](https://github.com/just-containers/s6-overlay) for added capabilities. Outgoing SMTP capabilities are handlded via `msmtp`. Individual container performance monitoring is performed by [zabbix-agent](https://zabbix.org). Additional tools include: `bash`,`curl`,`less`,`logrotate`, `nano`,`vim`.
+
+Be sure to view the following repositories to understand all the customizable options:
+
+| Image                                                  | Description                            |
+| ------------------------------------------------------ | -------------------------------------- |
+| [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
+| [Nginx](https://github.com/tiredofit/docker-nginx/)    | Nginx webserver                        |
 
 | Variable        | Description                              |
 | --------------- | ---------------------------------------- |
-| `BACKUPPC_UUID` | The uid for the backuppc user e.g. 10000 |
-| `BACKUPPC_GUID` | The gid for the backuppc user e.g. 10000 |
+| `BACKUPPC_UUID` | The uid for the backuppc user e.g. `10000` |
+| `BACKUPPC_GUID` | The gid for the backuppc user e.g. `10000` |
 
-_Authentication_
+#### Authentication
 
 By default, this image does not use authentication. This is definitely not recommended on a production environment! Based on the environment variables from the Nginx Base Image you can set them here:
 
@@ -133,9 +149,32 @@ The following ports are exposed and available to public interfaces
 
 For debugging and maintenance purposes you may want access the containers shell.
 
-```bash
-docker exec -it backuppc bash
-```
+``bash
+docker exec -it (whatever your container name is) bash
+``
+## Support
+
+These images were built to serve a specific need in a production environment and gradually have had more functionality added based on requests from the community.
+### Usage
+- The [Discussions board](../../discussions) is a great place for working with the community on tips and tricks of using this image.
+- Consider [sponsoring me](https://github.com/sponsors/tiredofit) personalized support.
+### Bugfixes
+- Please, submit a [Bug Report](issues/new) if something isn't working as expected. I'll do my best to issue a fix in short order.
+
+### Feature Requests
+- Feel free to submit a feature request, however there is no guarantee that it will be added, or at what timeline.
+- Consider [sponsoring me](https://github.com/sponsors/tiredofit) regarding development of features.
+
+### Updates
+- Best effort to track upstream changes, More priority if I am actively using the image in a production environment.
+- Consider [sponsoring me](https://github.com/sponsors/tiredofit) for up to date releases.
+
+## License
+MIT. See [LICENSE](LICENSE) for more details.
+
+## References
+
+- <https://www.bookstackapp.com/docs>
 
 # References
 
