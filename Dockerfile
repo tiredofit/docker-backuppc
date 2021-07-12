@@ -1,5 +1,5 @@
 FROM tiredofit/nginx:alpine-3.13
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV BACKUPPC_VERSION=4.4.0 \
     BACKUPPC_XS_VERSION=0.62 \
@@ -9,7 +9,7 @@ ENV BACKUPPC_VERSION=4.4.0 \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
     ZABBIX_HOSTNAME=backuppc-app \
-    ENABLE_SMTP=TRUE
+    CONTAINER_ENABLE_MESSAGING=TRUE
 
 RUN set -x && \
     apk update && \
