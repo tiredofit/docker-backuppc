@@ -128,6 +128,22 @@ When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit a
 `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1=HTTP_AUTH_USER,uid,upstream_http_uid` will get converted into `HTTP_AUTH_USER,$uid,$upstream_http_uid` and get placed in the appropriate areas in the configuration.
 * * *
 
+#### SMTP Options
+
+See the [MSMTP Configuration Options](https://marlam.de/msmtp/msmtp.html) for further information on options to configure MSMTP.
+| Parameter             | Description                                       | Default         |
+| --------------------- | ------------------------------------------------- | --------------- |
+| `SMTP_AUTO_FROM`      | Add setting to support sending through Gmail SMTP | `FALSE`         |
+| `SMTP_HOST`           | Hostname of SMTP Server                           | `postfix-relay` |
+| `SMTP_PORT`           | Port of SMTP Server                               | `25`            |
+| `SMTP_DOMAIN`         | HELO Domain                                       | `docker`        |
+| `SMTP_MAILDOMAIN`     | Mail Domain From                                  | `local`         |
+| `SMTP_AUTHENTICATION` | SMTP Authentication                               | `none`          |
+| `SMTP_USER`           | Enable SMTP services                              | `user`          |
+| `SMTP_PASS`           | Enable Zabbix Agent                               | `password`      |
+| `SMTP_TLS`            | Use TLS                                           | `FALSE`         |
+| `SMTP_STARTTLS`       | Start TLS from within session                     | `FALSE`         |
+| `SMTP_TLSCERTCHECK`   | Check remote certificate                          | `FALSE`         |
 ### Networking
 
 The following ports are exposed and available to public interfaces

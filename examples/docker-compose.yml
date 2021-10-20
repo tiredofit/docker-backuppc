@@ -17,7 +17,7 @@ services:
       - ./conf/home/:/home/backuppc
       - ./logs:/www/logs
     environment:
-      - ZABBIX_HOSTNAME=backuppc-app
+      - CONTAINER_NAME=backuppc-app
       - BACKUPPC_UUID=10000
       - BACKUPPC_GUID=10000
       

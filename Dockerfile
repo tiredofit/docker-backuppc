@@ -1,4 +1,4 @@
-FROM tiredofit/nginx:alpine-3.14
+FROM docker.io/tiredofit/nginx:alpine-3.14
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV BACKUPPC_VERSION=4.4.0 \
@@ -8,7 +8,6 @@ ENV BACKUPPC_VERSION=4.4.0 \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
-    ZABBIX_HOSTNAME=backuppc-app \
     CONTAINER_ENABLE_MESSAGING=TRUE
 
 RUN set -x && \
@@ -28,6 +27,7 @@ RUN set -x && \
                 make \
                 patch \
                 perl-dev \
+                perl-app-cpanminus \
                 && \
     \
     # Install backuppc runtime dependencies
@@ -43,6 +43,7 @@ RUN set -x && \
                 perl-archive-zip \
                 perl-cgi \
                 perl-file-listing \
+                perl-json-xs \
                 perl-xml-rss \
                 pigz \
                 rrdtool \
@@ -52,6 +53,12 @@ RUN set -x && \
                 sudo \
                 ttf-dejavu \
                 && \
+    \
+    # Install Perl Modules not included in package
+    cpanm install \
+    Net::FTP \
+    Net::FTP::AutoReconnect \
+    && \
     \
     # Compile and install Parallel BZIP
     mkdir -p /usr/src/pbzip2 && \
@@ -97,12 +104,9 @@ RUN set -x && \
     \
     # Cleanup
     apk del .backuppc-build-deps && \
-    rm -rf /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
+    rm -rf /root/.cpanm /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/*
 
 ### Add Folders
 ADD install/ /
-
-## Networking
-EXPOSE 80

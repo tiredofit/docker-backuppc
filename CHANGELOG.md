@@ -1,3 +1,9 @@
+## 5.3.2 2021-10-20 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add perl packages to support metrics export
+
+
 ## 5.3.1 2021-07-30 <dave at tiredofit dot ca>
 
    ### Added

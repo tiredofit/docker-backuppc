@@ -13,7 +13,6 @@ adduser -D -S -h /home/backuppc -G backuppc -u "${BACKUPPC_UUID}" backuppc
 addgroup zabbix backuppc
 mkdir -p /home/backuppc
 chown backuppc:backuppc /home/backuppc
-echo '%zabbix ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Generate cryptographic keys
 if [ ! -f /home/backuppc/.ssh/id_rsa ]; then
@@ -45,10 +44,6 @@ silent perl configure.pl \
 
 mkdir -p /www/logs/backuppc
 chown -R backuppc /www/logs/backuppc
-
-if [ -f "/etc/msmtprc" ] ; then
-	cp -R /etc/msmtprc /home/backuppc/.msmtprc
-fi
 
 if [ -d /etc/BackupPC ]; then
 	chown -R backuppc /etc/BackupPC
