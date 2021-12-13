@@ -1,0 +1,1041 @@
+{
+    "zabbix_export": {
+        "version": "5.4",
+        "date": "2021-12-13T01:04:47Z",
+        "groups": [
+            {
+                "uuid": "3500ba09d0534297840ca620c9dd46bf",
+                "name": "Backup"
+            },
+            {
+                "uuid": "7df96b18c230490a9a0a9e2307226338",
+                "name": "Templates"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "9caddf6c00c743199019d559f4085e28",
+                "template": "BackupPC",
+                "name": "BackupPC",
+                "description": "Template for monitoring BackupPC instance\n\nThis is meant to be used with https://github.com/tiredofit/docker-backuppc",
+                "groups": [
+                    {
+                        "name": "Backup"
+                    },
+                    {
+                        "name": "Templates"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "38d5865eedcc41c1ba16635c3307a78a",
+                        "name": "BackupPC: Collect Data",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "backuppc.collect_data",
+                        "history": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "description": "system.run[\"sudo -u backuppc /etc/zabbix/zabbix_agentd.conf.d/backuppc.pl\"]",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "5b83f50bfa774b27878f17012cc77b38",
+                        "name": "BackupPC: Config Uptime",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.config_load_time",
+                        "delay": "0",
+                        "history": "7d",
+                        "units": "uptime",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e504b0e4c36d40218532eade15db1351",
+                        "name": "BackupPC: Pool Directory Count (Compressed)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.cpool_dir_count",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e623b37b7ec84b16b6383edc761c9ab4",
+                        "name": "BackupPC: Pool File Count (Compressed)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.cpool_file_count",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "122be6aae4f5464c9057f4f9eafe1a66",
+                        "name": "BackupPC: Pool File Max Links (Compressed)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.cpool_file_link_max",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "653632ef59774675a36fdb0bc0905757",
+                        "name": "BackupPC: Pool File Repeat (Compressed)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.cpool_file_repeat",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "d054d159602b403dbf13d50047a19eab",
+                        "name": "BackupPC: Pool File Repeat Max (Compressed)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.cpool_file_repeat_max",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "21cebc1156ae40bc885b773d53ec5e9f",
+                        "name": "BackupPC: Pool Size (Compressed)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.cpool_size",
+                        "delay": "0",
+                        "history": "7d",
+                        "units": "B",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "1024"
+                                ]
+                            }
+                        ],
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "f27f0c01a3064fa4bebfd7040b64e04f",
+                        "name": "BackupPC: Hosts with full age more than 1 week",
+                        "type": "TRAP",
+                        "key": "backuppc.hosts_full_age_days",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "930bfa04f02c405090a52477eeb2efec",
+                                "expression": "find(/BackupPC/backuppc.hosts_full_age_days,,\"like\",\"NONE\")=0",
+                                "name": "BackupPC: {HOSTNAME} Full backup older than 1 week",
+                                "status": "DISABLED",
+                                "priority": "DISASTER",
+                                "description": "BackupPC has some hosts missing weekly full backup. Please take action to correct."
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "ebd2c266afa648a2ad9037eac78f0c40",
+                        "name": "BackupPC: Full Backup Count",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_full_count",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e7751fde827a4503881228d539a64638",
+                        "name": "BackupPC: Full Backup Size",
+                        "type": "TRAP",
+                        "key": "backuppc.hosts_full_size",
+                        "delay": "0",
+                        "history": "7d",
+                        "units": "B",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "161a998c3fd1456da4193062961741f8",
+                        "name": "BackupPC: Average Backup Speed (Full)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_full_speed",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "FLOAT",
+                        "units": "B/sec",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "6cc5e47fb04c421b8712cb257a40541f",
+                        "name": "BackupPC: Incremental Backup Count",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_incr_count",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "5343e1d3512349f39d7172637a11adfb",
+                        "name": "BackupPC: Incremental Backup Size",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_incr_size",
+                        "delay": "0",
+                        "history": "7d",
+                        "units": "B",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "09c0d12ddb6047c2b123b4357fb40f08",
+                        "name": "BackupPC: Average Backup Speed (Incremental)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_incr_speed",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "FLOAT",
+                        "units": "B/sec",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "3199c688768d4ed09d9874a686a1ea96",
+                        "name": "BackupPC: Hosts with No backups (2 Days)",
+                        "type": "TRAP",
+                        "key": "backuppc.hosts_nobackup_2",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "52bb6f79b1c244478870d1f602bdcf79",
+                        "name": "BackupPC: Hosts with No backups (3 Days)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_nobackup_3",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "units": "uptime",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "2d91ae6512c94fbe99b4b0cecd959963",
+                        "name": "BackupPC: Hosts with No backups (4 Days)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_nobackup_4",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "units": "uptime",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "3b81c57ca42b4a8ebbf01423ac11cd14",
+                        "name": "BackupPC: Hosts with No backups (5 Days)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.hosts_nobackup_5",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "units": "uptime",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "bdd0d9e68b2b409b8067c7fc73dd41a0",
+                                "expression": "find(/BackupPC/backuppc.hosts_nobackup_5,,\"like\",\"NONE\")=0",
+                                "name": "BackupPC: Host without Backups (5 Days)",
+                                "status": "DISABLED",
+                                "priority": "DISASTER",
+                                "description": "There are some hosts that have not been backed up in 5 Days, this should be checked immediately."
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "d9223ad5b60c442fbe3e5c1289a7c349",
+                        "name": "BackupPC: Jobs (Full Backup)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.jobs_full",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "d451de55d0b74e02a0f00d3d11387ae6",
+                        "name": "BackupPC: Jobs (Incremental Backup)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.jobs_incr",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "19eac73ca63545d6bed9fa394a2a41a5",
+                        "name": "BackupPC: Jobs (Other Backup)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.jobs_other",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "29e339ffcd22492a9a056693a424b92b",
+                        "name": "BackupPC: Pool Directory Count",
+                        "type": "TRAP",
+                        "key": "backuppc.pool_dir_count",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "aa4335e69d3c4c068bdeb9e1525be5bd",
+                        "name": "BackupPC: Pool File Count",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.pool_file_count",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "f921e5dd7edb4730af28e7d0cbc901ec",
+                        "name": "BackupPC: Pool File Max Links",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.pool_file_link_max",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "dddf80e30bbb420bb51fa517bda36873",
+                        "name": "BackupPC: Pool File Repeat",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.pool_file_repeat",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "99beaa3f926741f3b97cbe5c3471b7a3",
+                        "name": "BackupPC: Pool File Repeat Max",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.pool_file_repeat_max",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "c5544fbff39e451099df8ee65d667130",
+                        "name": "BackupPC: Pool Size",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.pool_size",
+                        "delay": "0",
+                        "history": "7d",
+                        "units": "kbytes",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "1024"
+                                ]
+                            }
+                        ],
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a5a576618df84afc9c0b23213ac4fb7d",
+                        "name": "BackupPC: Queue (Background)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.queue_background",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "c361f6c9069e4e62bdb01f05f3582961",
+                        "name": "BackupPC: Queue (Command)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.queue_command",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "58bb110711544f3a92748dbb71024d1c",
+                        "name": "BackupPC: Queue (User)",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.queue_user",
+                        "delay": "0",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "2a0683c1ac784b68a1fd76861a6917c2",
+                        "name": "BackupPC: Uptime",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.uptime",
+                        "delay": "0",
+                        "history": "7d",
+                        "units": "uptime",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "d203783ea4454c23b85a5f1221bc3eb8",
+                        "name": "BackupPC: Version",
+                        "type": "TRAP",
+                        "snmp_oid": "interfaces.ifTable.ifEntry.ifInOctets.1",
+                        "key": "backuppc.version",
+                        "delay": "0",
+                        "history": "7d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "units": "uptime",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "40ffe725f6224b18a90076306f92f0a0",
+                        "name": "BackupPC: Memory Usage",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.mem[,backuppc]",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "B",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "51d8e48a7e544950a688407324996191",
+                        "name": "BackupPC: BackupPC Process",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.num[BackupPC]",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "da2dde44285e4dadb5a5fd860b5a95e9",
+                                "expression": "sum(/BackupPC/proc.num[BackupPC],#3)=0",
+                                "name": "BackupPC not running",
+                                "priority": "DISASTER",
+                                "description": "The BackupPC process it not running, try restarting the service."
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "686260b55fd1482bb29e746270e768a9",
+                        "name": "BackupPC: BackupPC_dump Process",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.num[BackupPC_dump]",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "8b32702e514342489fd18da97b7f40d0",
+                        "name": "BackupPC: BackupPC_link Process",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.num[BackupPC_link]",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "ef94514c702b4801a8d15db61bf8c37f",
+                        "name": "BackupPC: BackupPC_nightly Process",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "system.run[\"ps waux | grep BackupPC_nightly | grep -v grep | wc -l\"]",
+                        "history": "7d",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "BackupPC"
+                            }
+                        ]
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "uuid": "df1222b35c3b4d448a78397e66f8793d",
+                        "name": "Discover backup hosts",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "backuppc.discover",
+                        "filter": {
+                            "conditions": [
+                                {
+                                    "macro": "{#BACKUPHOST}",
+                                    "value": ".*",
+                                    "formulaid": "A"
+                                }
+                            ]
+                        },
+                        "item_prototypes": [
+                            {
+                                "uuid": "d26cf6e75d3e4861955e746d4b377d18",
+                                "name": "{#BACKUPHOST} full backup age",
+                                "type": "TRAP",
+                                "key": "backuppc.fullage[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "days",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "b6d85539ba004653b6f74fd1f4793939",
+                                "name": "{#BACKUPHOST} full backup BadFile",
+                                "type": "TRAP",
+                                "key": "backuppc.fullbadfile[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "d7d79d12021346e0a2d3c88d14bd4be2",
+                                        "expression": "last(/BackupPC/backuppc.fullbadfile[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has bad file in full backup",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "3c305ec30b8e4297be9502c21bfec3d3",
+                                "name": "{#BACKUPHOST} full backup BadShare",
+                                "type": "TRAP",
+                                "key": "backuppc.fullbadshare[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "9bf9677cad114965b6b1e3434aad8e1e",
+                                        "expression": "last(/BackupPC/backuppc.fullbadshare[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has bad share in full backup",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "b8d87ef243744f638eae8242e085d2e1",
+                                "name": "{#BACKUPHOST} full backup duration",
+                                "type": "TRAP",
+                                "key": "backuppc.fulldur[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "s",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "d6cade5727034ed88f20df869652d34a",
+                                "name": "{#BACKUPHOST} full backup xfer errors",
+                                "type": "TRAP",
+                                "key": "backuppc.fullerrs[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "a4d67609d3494652a410a7117f9059ea",
+                                        "expression": "last(/BackupPC/backuppc.fullerrs[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has error in full backup",
+                                        "priority": "AVERAGE",
+                                        "manual_close": "YES"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "0391d93c4ce441c48e19ce8ec196fdca",
+                                "name": "{#BACKUPHOST} full backup size",
+                                "type": "TRAP",
+                                "key": "backuppc.fullsize[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "byte",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "5cb059061812482ea40d6eff5bd66c57",
+                                "name": "{#BACKUPHOST} full backup tar errors",
+                                "type": "TRAP",
+                                "key": "backuppc.fulltarerrs[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "962bd9c4a0ee40cab40ba32db2a504a1",
+                                        "expression": "last(/BackupPC/backuppc.fulltarerrs[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has tar error in full backup",
+                                        "priority": "WARNING",
+                                        "manual_close": "YES"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "d98d067597f9427ca583babc544b6c34",
+                                "name": "{#BACKUPHOST} incremental backup age",
+                                "type": "TRAP",
+                                "key": "backuppc.incrage[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "days",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "d38028af4da445e3a6cf2708f4ccb2d1",
+                                "name": "{#BACKUPHOST} incremental backup BadFile",
+                                "type": "TRAP",
+                                "key": "backuppc.incrbadfile[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "6f15c931040a4c2a9b181b051008246e",
+                                        "expression": "last(/BackupPC/backuppc.incrbadfile[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has bad file in incremental backup",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "8ec151ac333741eabc77aa86f2057a27",
+                                "name": "{#BACKUPHOST} incremental backup BadShare",
+                                "type": "TRAP",
+                                "key": "backuppc.incrbadshare[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "66e2c640252c4de7a274d3252341c7a8",
+                                        "expression": "last(/BackupPC/backuppc.incrbadshare[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has bad share in incremental backup",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "6f86f53375cd43d4b469a5cbfc006672",
+                                "name": "{#BACKUPHOST} incremental backup duration",
+                                "type": "TRAP",
+                                "key": "backuppc.incrdur[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "s",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "1e553fc1d87b47d1a3c6c5359a185194",
+                                "name": "{#BACKUPHOST} incremental backup xfer errors",
+                                "type": "TRAP",
+                                "key": "backuppc.increrrs[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "9bd5ba1b5d35498f93c3ca67cc4ed0d1",
+                                        "expression": "last(/BackupPC/backuppc.increrrs[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has error in incremental backup",
+                                        "priority": "AVERAGE",
+                                        "manual_close": "YES"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "5b1b9253fae44d3b962e5df62cd18529",
+                                "name": "{#BACKUPHOST} incremental backup size",
+                                "type": "TRAP",
+                                "key": "backuppc.incrsize[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "byte",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "e0c43afcd31246498dd3a3b870da9cb1",
+                                "name": "{#BACKUPHOST} incremental backup tar errors",
+                                "type": "TRAP",
+                                "key": "backuppc.incrtarerrs[{#BACKUPHOST}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "p",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "BackupPC: backups"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "uuid": "f140c5fdf87642e1aa1389fda434d356",
+                                        "expression": "last(/BackupPC/backuppc.incrtarerrs[{#BACKUPHOST}])>0",
+                                        "name": "{#BACKUPHOST} has tar error in incremental backup",
+                                        "priority": "WARNING",
+                                        "manual_close": "YES"
+                                    }
+                                ]
+                            }
+                        ],
+                        "request_method": "POST"
+                    }
+                ]
+            }
+        ],
+        "triggers": [
+            {
+                "uuid": "419d852cf0c24f659f73f2ee7df7a420",
+                "expression": "find(/BackupPC/backuppc.hosts_nobackup_2,,\"like\",\"NONE\")=0 and find(/BackupPC/backuppc.hosts_nobackup_3,,\"like\",\"NONE\")<>0 and find(/BackupPC/backuppc.hosts_nobackup_4,,\"like\",\"NONE\")<>0 and find(/BackupPC/backuppc.hosts_nobackup_5,,\"like\",\"NONE\")<>0",
+                "name": "BackupPC: Host without Backups (2 Days)",
+                "priority": "INFO",
+                "description": "There are some hosts that have not been backed up in 2 Days, while this is not a problem it should be monitored."
+            },
+            {
+                "uuid": "0a7d9b4abf8e4f719a4003523480deb4",
+                "expression": "find(/BackupPC/backuppc.hosts_nobackup_3,,\"like\",\"NONE\")=0 and find(/BackupPC/backuppc.hosts_nobackup_4,,\"like\",\"NONE\")<>0 and find(/BackupPC/backuppc.hosts_nobackup_5,,\"like\",\"NONE\")<>0",
+                "name": "BackupPC: Host without Backups (3 Days)",
+                "status": "DISABLED",
+                "priority": "DISASTER",
+                "description": "There are some hosts that have not been backed up in 3 Days, this should be checked soon."
+            },
+            {
+                "uuid": "0d8d326623bb4efa9cf015359f716168",
+                "expression": "find(/BackupPC/backuppc.hosts_nobackup_4,,\"like\",\"NONE\")=0 and find(/BackupPC/backuppc.hosts_nobackup_5,,\"like\",\"NONE\")<>0",
+                "name": "BackupPC: Host without Backups (4 Days)",
+                "status": "DISABLED",
+                "priority": "DISASTER",
+                "description": "There are some hosts that have not been backed up in 4 Days, this should be checked immediately."
+            }
+        ]
+    }
+}

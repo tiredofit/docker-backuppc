@@ -1,3 +1,10 @@
+## 5.3.4 2021-12-12 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Alpine 3.15 base
+      - Rework Zabbix Templates
+
+
 ## 5.3.3 2021-12-07 <dave at tiredofit dot ca>
 
    ### Added
