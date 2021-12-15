@@ -5,8 +5,7 @@ prepare_service
 PROCESS_NAME="backuppc"
 
 if var_true "${CONTAINER_ENABLE_MONITORING}" && [ "${CONTAINER_MONITORING_BACKEND,,}" = "zabbix" ]; then
-	source /assets/defaults/03-monitoring
-	cat <<EOF > "${ZABBIX_CONFIG_PATH}"/"${ZABBIX_CONFIG_FILE}.d"/tiredofit_unbound.conf
+	cat <<EOF > "${ZABBIX_CONFIG_PATH}"/"${ZABBIX_CONFIG_FILE}.d"/tiredofit_backuppc.conf
 # Zabbix BackupPC Configuration - Automatically Generated
 # Find Companion Zabbix Server Templates at https://github.com/tiredofit/docker-backuppc
 # Autoregister=backuppc

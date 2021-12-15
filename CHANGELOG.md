@@ -1,3 +1,9 @@
+## 5.3.5 2021-12-15 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Cleanup for Zabbix Auto agent registration
+
+
 ## 5.3.4 2021-12-12 <dave at tiredofit dot ca>
 
    ### Changed
