@@ -1,3 +1,9 @@
+## 5.3.6 2021-12-22 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for BackuPC Zabbix template not appearing
+
+
 ## 5.3.5 2021-12-15 <dave at tiredofit dot ca>
 
    ### Changed
