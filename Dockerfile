@@ -44,6 +44,7 @@ RUN set -x && \
                 perl-cgi \
                 perl-file-listing \
                 perl-json-xs \
+                perl-time-parsedate \
                 perl-xml-rss \
                 pigz \
                 rrdtool \
