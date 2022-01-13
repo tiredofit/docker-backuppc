@@ -1,3 +1,9 @@
+## 5.3.7 2022-01-13 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add perl-date-parsetime package
+
+
 ## 5.3.6 2021-12-22 <dave at tiredofit dot ca>
 
    ### Changed
