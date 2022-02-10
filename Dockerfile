@@ -8,7 +8,9 @@ ENV BACKUPPC_VERSION=4.4.0 \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
-    CONTAINER_ENABLE_MESSAGING=TRUE
+    CONTAINER_ENABLE_MESSAGING=TRUE \
+    IMAGE_NAME="tiredofit/backuppc" \
+    IMAGE_REPO_URL="https://github.com/tiredofit/docker-backuppc/"
 
 RUN set -x && \
     apk update && \

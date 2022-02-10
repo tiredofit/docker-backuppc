@@ -1,16 +1,10 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 source /assets/functions/00-container
 prepare_service
 PROCESS_NAME="backuppc"
 
-if var_true "${CONTAINER_ENABLE_MONITORING}" && [ "${CONTAINER_MONITORING_BACKEND,,}" = "zabbix" ]; then
-	cat <<EOF > "${ZABBIX_CONFIG_PATH}"/"${ZABBIX_CONFIG_FILE}.d"/tiredofit_backuppc.conf
-# Zabbix BackupPC Configuration - Automatically Generated
-# Find Companion Zabbix Server Templates at https://github.com/tiredofit/docker-backuppc
-# Autoregister=backuppc
-EOF
-fi
+create_zabbix backuppc
 
 print_notice "First run of the container. BackupPC will be installed."
 print_notice "If exist, configuration and data will be reused and upgraded as needed."

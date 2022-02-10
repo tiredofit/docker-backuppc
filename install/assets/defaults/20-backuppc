@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 BACKUPPC_ADMIN_USER=${BACKUPPC_ADMIN_USER:-"backuppc"}
 BACKUPPC_UUID=${BACKUPPC_UUID:-1000}
