@@ -16,7 +16,6 @@ RUN set -x && \
     apk update && \
     apk upgrade && \
     apk add -t .backuppc-build-deps \
-            # Install backuppc build dependencies
                 autoconf \
                 automake \
                 acl-dev \
@@ -32,7 +31,6 @@ RUN set -x && \
                 perl-app-cpanminus \
                 && \
     \
-    # Install backuppc runtime dependencies
     apk add -t .backuppc-run-deps \
                 bzip2 \
                 expat \
@@ -58,7 +56,7 @@ RUN set -x && \
                 && \
     \
     # Install Perl Modules not included in package
-    cpanm install \
+    cpanm -M https://cpan.metacpan.org install \
     Net::FTP \
     Net::FTP::AutoReconnect \
     && \

@@ -1,3 +1,9 @@
+## 5.3.10 2022-05-24 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Switch to using secure CPAN mirror when installing Net::FTP
+
+
 ## 5.3.9 2022-05-24 <dave at tiredofit dot ca>
 
    ### Added
