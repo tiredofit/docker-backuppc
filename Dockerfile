@@ -8,6 +8,7 @@ ENV BACKUPPC_VERSION=4.4.0 \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
+    NGINX_SITE_ENABLED=backuppc \
     CONTAINER_ENABLE_MESSAGING=TRUE \
     IMAGE_NAME="tiredofit/backuppc" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-backuppc/"
