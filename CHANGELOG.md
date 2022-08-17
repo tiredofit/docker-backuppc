@@ -1,3 +1,9 @@
+## 5.3.12 2022-08-17 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Switch to using exec statements
+
+
 ## 5.3.11 2022-06-23 <dave at tiredofit dot ca>
 
    ### Added

@@ -8,7 +8,7 @@ check_service_initialized init 10-nginx
 liftoff
 
 print_start "Starting fcgiwrap"
-silent /usr/bin/spawn-fcgi  \
+silent exec /usr/bin/spawn-fcgi  \
         -s /var/run/fcgiwrap.sock \
         -P /var/run/fcgiwrap.pid \
         -u backuppc \
