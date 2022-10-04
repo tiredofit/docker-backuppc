@@ -13,7 +13,8 @@ ENV BACKUPPC_VERSION=4.4.0 \
     IMAGE_NAME="tiredofit/backuppc" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-backuppc/"
 
-RUN set -x && \
+RUN source /assets/functions/00-container && \
+    set -x && \
     apk update && \
     apk upgrade && \
     apk add -t .backuppc-build-deps \
@@ -70,25 +71,21 @@ RUN set -x && \
     make install && \
     \
     # Compile and install BackupPC:XS
-    cd /usr/src && \
-    git clone https://github.com/backuppc/backuppc-xs.git /usr/src/backuppc-xs --branch $BACKUPPC_XS_VERSION && \
-    cd /usr/src/backuppc-xs && \
+    clone_git_repo https://github.com/backuppc/backuppc-xs.git ${BACKUPPC_XS_VERSION} && \
     perl Makefile.PL && \
     make && \
     make test && \
     make install && \
     \
     # Compile and install Rsync (BPC version)
-    git clone https://github.com/backuppc/rsync-bpc.git /usr/src/rsync-bpc --branch $RSYNC_BPC_VERSION && \
-    cd /usr/src/rsync-bpc && \
+    clone_git_repo https://github.com/backuppc/rsync-bpc.git ${RSYNC_BPC_VERSION} && \
     ./configure && \
     make reconfigure && \
     make && \
     make install && \
     \
     # Compile and install PAR2
-    git clone https://github.com/Parchive/par2cmdline.git /usr/src/par2cmdline --branch $PAR2_VERSION && \
-    cd /usr/src/par2cmdline && \
+    clone_git_repo https://github.com/Parchive/par2cmdline.git ${PAR2_VERSION} && \
     ./automake.sh && \
     ./configure && \
     make && \

@@ -1,3 +1,9 @@
+## 5.3.13 2022-10-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Switch to clone_git_repo function
+
+
 ## 5.3.12 2022-08-17 <dave at tiredofit dot ca>
 
    ### Changed
