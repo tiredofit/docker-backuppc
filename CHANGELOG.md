@@ -1,3 +1,9 @@
+## 5.3.14 2022-10-05 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix legacy nginx configuration
+
+
 ## 5.3.13 2022-10-04 <dave at tiredofit dot ca>
 
    ### Changed
