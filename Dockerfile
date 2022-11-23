@@ -1,4 +1,4 @@
-FROM docker.io/tiredofit/nginx:alpine-3.16
+FROM docker.io/tiredofit/nginx:alpine-3.17
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV BACKUPPC_VERSION=4.4.0 \
@@ -108,4 +108,4 @@ RUN source /assets/functions/00-container && \
     rm -rf /var/cache/apk/*
 
 ### Add Folders
-ADD install/ /
+COPY install/ /
