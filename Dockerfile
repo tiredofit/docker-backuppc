@@ -1,10 +1,18 @@
-FROM docker.io/tiredofit/nginx:alpine-3.17
+ARG DISTRO="alpine"
+ARG DISTRO_VARIANT="3.17"
+
+FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-ENV BACKUPPC_VERSION=4.4.0 \
-    BACKUPPC_XS_VERSION=0.62 \
-    PAR2_VERSION=v0.8.0 \
-    RSYNC_BPC_VERSION=3.1.3.0 \
+ARG BACKUPPC_VERSION
+ARG BACKUPPC_XS_VERSION
+ARG PAR2_VERSION
+ARG RSYNC_BPC_VERSION
+
+ENV BACKUPPC_VERSION=${BACKUPPC_VERSION:-"4.4.0"} \
+    BACKUPPC_XS_VERSION=${BACKUPPC_XS_VERSION:-"0.62"} \
+    PAR2_VERSION=${PAR2_VERSION:-"v0.8.0"} \
+    RSYNC_BPC_VERSION=${RSYNC_BPC_VERSION:-"3.1.3.0"} \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_USER=backuppc \
     NGINX_GROUP=backuppc \
@@ -15,9 +23,9 @@ ENV BACKUPPC_VERSION=4.4.0 \
 
 RUN source /assets/functions/00-container && \
     set -x && \
-    apk update && \
-    apk upgrade && \
-    apk add -t .backuppc-build-deps \
+    package update && \
+    package upgrade && \
+    package install .backuppc-build-deps \
                 autoconf \
                 automake \
                 acl-dev \
@@ -33,7 +41,7 @@ RUN source /assets/functions/00-container && \
                 perl-app-cpanminus \
                 && \
     \
-    apk add -t .backuppc-run-deps \
+    package install .backuppc-run-deps \
                 bzip2 \
                 expat \
                 gzip \
@@ -67,13 +75,13 @@ RUN source /assets/functions/00-container && \
     mkdir -p /usr/src/pbzip2 && \
     curl -ssL https://launchpad.net/pbzip2/1.1/1.1.13/+download/pbzip2-1.1.13.tar.gz | tar xvfz - --strip=1 -C /usr/src/pbzip2 && \
     cd /usr/src/pbzip2 && \
-    make && \
+    make -j$(nproc)&& \
     make install && \
     \
     # Compile and install BackupPC:XS
     clone_git_repo https://github.com/backuppc/backuppc-xs.git ${BACKUPPC_XS_VERSION} && \
     perl Makefile.PL && \
-    make && \
+    make -j$(nproc)&& \
     make test && \
     make install && \
     \
@@ -81,14 +89,14 @@ RUN source /assets/functions/00-container && \
     clone_git_repo https://github.com/backuppc/rsync-bpc.git ${RSYNC_BPC_VERSION} && \
     ./configure && \
     make reconfigure && \
-    make && \
+    make -j$(nproc)&& \
     make install && \
     \
     # Compile and install PAR2
     clone_git_repo https://github.com/Parchive/par2cmdline.git ${PAR2_VERSION} && \
     ./automake.sh && \
     ./configure && \
-    make && \
+    make -j$(nproc)&& \
     make check && \
     make install && \
     \
@@ -102,10 +110,11 @@ RUN source /assets/functions/00-container && \
     touch /firstrun && \
     \
     # Cleanup
-    apk del .backuppc-build-deps && \
-    rm -rf /root/.cpanm /usr/src/backuppc-xs /usr/src/rsync-bpc /usr/src/par2cmdline /usr/src/pbzip2 && \
-    rm -rf /tmp/* && \
-    rm -rf /var/cache/apk/*
+    package remove .backuppc-build-deps && \
+    package cleanup && \
+    rm -rf /root/.cpanm \
+           /tmp/* \
+           /usr/src/* \
+           /tmp/*
 
-### Add Folders
 COPY install/ /

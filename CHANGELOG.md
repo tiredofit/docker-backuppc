@@ -1,3 +1,9 @@
+## 5.3.16 2022-12-01 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Rework Dockerfile
+
+
 ## 5.3.15 2022-11-23 <dave at tiredofit dot ca>
 
    ### Added
