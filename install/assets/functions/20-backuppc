@@ -1,0 +1,70 @@
+#!/command/with-contenv bash
+
+bootstrap_filesystem() {
+    print_debug "[bootstrap_filesystem] Creating Configuration directory"
+    if [ ! -d "${CONFIG_PATH}" ]; then
+        mkdir -p "${CONFIG_PATH}"
+    fi
+    if [ "$(stat -c '%u' "${CONFIG_PATH}")" != "$(id -u backuppc)" ] ; then chown -R backuppc:backuppc "${CONFIG_PATH}" ; fi
+    if dir_empty "${CONFIG_PATH}" ; then
+        print_notice "[bootstrap_filesystem] Detected New Installation - Generating default configuration"
+    fi
+
+    print_debug "[bootstrap_filesystem] Creating Configuration directory"
+    if [ ! -d "${DATA_PATH}" ]; then
+        mkdir -p "${DATA_PATH}"
+    fi
+    if [ "$(stat -c '%u' "${DATA_PATH}")" != "$(id -u backuppc)" ] ; then chown backuppc:backuppc "${DATA_PATH}" ; fi
+
+
+    print_debug "[bootstrap_filesystem] Creating SSH Keys directory"
+    if [ ! -d "${SSH_KEYS_PATH}" ]; then
+        mkdir -p "${SSH_KEYS_PATH}"
+    fi
+
+    if [ "$(stat -c '%u' "${SSH_KEYS_PATH}")" != "$(id -u backuppc)" ] ; then chown -R backuppc:backuppc "${SSH_KEYS_PATH}" ; fi
+    if [ "$(stat -c '%a' "${SSH_KEYS_PATH}")" != "700" ] ; then chmod 700 "${SSH_KEYS_PATH}" ; fi
+    if [[ "${SSH_KEYS_PATH}" =~ "/home/backupppc".* ]] ; then
+        if [ "$(stat -c '%u' "/home/backuppc")" != "$(id -u backuppc)" ] ; then chown -R backuppc:backuppc "/home/backuppc" ; fi
+    fi
+    if [ ! -d "/home/backuppc/.ssh" ] ; then
+        ln -sf "${SSH_KEYS_PATH}" /home/backuppc/.ssh
+    fi
+
+    print_debug "[bootstrap_filesystem] Creating Logfiles"
+    if [ ! -d "${LOG_PATH}" ]; then
+        mkdir -p "${LOG_PATH}"
+    fi
+    if [ "$(stat -c '%u' "${LOG_PATH}")" != "$(id -u backuppc)" ] ; then chown -R backuppc:backuppc "${LOG_PATH}" ; fi
+}
+
+configure_ui() {
+    sed -ie "s/^\$Conf{CgiAdminUsers}\s*=\s*'\w*'/\$Conf{CgiAdminUsers} = 'backuppc'/g" "${CONFIG_PATH}"/config.pl
+}
+
+generate_ssh_keys() {
+    if [ ! -f "${SSH_KEYS_PATH}"/id_rsa ]; then
+        print_notice "[generate_ssh_keys] Creating RSA SSH key"
+        silent su backuppc -s /bin/sh -c "ssh-keygen -t rsa -b 4096 -N '' -f ${SSH_KEYS_PATH}/id_rsa"
+    fi
+
+    if [ ! -f "${SSH_KEYS_PATH}"/id_ed25519 ]; then
+        print_notice "[generate_ssh_keys] Creating ed25519 SSH key"
+        silent su backuppc -s /bin/sh -c "ssh-keygen -t ed25519 -o -a 100 -q -N '' -f ${SSH_KEYS_PATH}/id_ed25519"
+    fi
+}
+
+install_backuppc() {
+    print_debug "[install_backuppc] Installing BackupPC ${BACKUPPC_VERSION}"
+    cd /assets/install || exit
+    silent perl configure.pl \
+        --batch \
+        --config-dir "${CONFIG_PATH}" \
+        --cgi-dir /www/cgi-bin/BackupPC \
+        --data-dir "${DATA_PATH}" \
+        --hostname localhost \
+        --html-dir /www/html/BackupPC \
+        --html-dir-url /BackupPC \
+        --install-dir /usr/local/BackupPC \
+        --log-dir "${LOG_PATH}"
+}

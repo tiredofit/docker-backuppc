@@ -54,7 +54,7 @@ sub hosts_info
 	$incrCnt2 = 0;
 	$total_speed_full = 0;
 	$total_speed_incr = 0;
-	
+
 	$no_backups_2 = "NONE";
         $no_backups_3 = "NONE";
         $no_backups_4 = "NONE";
@@ -103,12 +103,12 @@ sub hosts_info
                 $Var{$vincrBadShare}="backuppc.incrbadshare[".$host."]";
                 $Var{$vincrBadFile}="backuppc.incrbadfile[".$host."]";
                 $Var{$vincrtarErrs}="backuppc.incrtarerrs[".$host."]";
- 	       	for ( my $i = 0 ; $i < @Backups ; $i++ ) 
+ 	       	for ( my $i = 0 ; $i < @Backups ; $i++ )
 		{
-                        if ( $Backups[$i]{type} eq "full" ) 
+                        if ( $Backups[$i]{type} eq "full" )
 			{
                 		$fullCnt++;
-                		if ( $fullAge < 0 || $Backups[$i]{startTime} > $fullAge ) 
+                		if ( $fullAge < 0 || $Backups[$i]{startTime} > $fullAge )
 				{
                 			$fullAge  = $Backups[$i]{startTime};
                     			$fullSize = $Backups[$i]{size};
@@ -122,11 +122,11 @@ sub hosts_info
                                         $Val{$vfullDur}=$fullDur;
                 		}
                 	$fullSizeTot += $Backups[$i]{size};
-            		} 
-			else 
+            		}
+			else
 			{
                 		$incrCnt++;
-                		if ( $incrAge < 0 || $Backups[$i]{startTime} > $incrAge ) 
+                		if ( $incrAge < 0 || $Backups[$i]{startTime} > $incrAge )
 				{
                     			$incrAge  = $Backups[$i]{startTime};
                                         $incrSize = $Backups[$i]{size};
@@ -156,14 +156,14 @@ sub hosts_info
                 }
 
 		if ($host eq "haulingaz")
-		{ 
+		{
 			print "Full Age: $fullAge\n";
 			print "Full Period: $Conf{FullPeriod}\n";
 			print "Incr Age: $incrAge\n";
 			print "Incr Period: $Conf{IncrPeriod}\n";
 		}
 
-                # Check for Hosts that don't have backups (Full)         
+                # Check for Hosts that don't have backups (Full)
 		my $skip_inc = 0;
 
 		# If we have a full that less than 2 days old we can skip
@@ -171,45 +171,45 @@ sub hosts_info
                 { $skip_inc = 1;}
 
 		# If we don't have any fulls, we are going to set the no_backups so we can skip inc
-                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 2) ) && 
+                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 2) ) &&
 $Conf{BackupsDisable} == 0 )
-                { if ($no_backups_2 eq "NONE") { $no_backups_2 = "$host"} else { $no_backups_2 .= 
+                { if ($no_backups_2 eq "NONE") { $no_backups_2 = "$host"} else { $no_backups_2 .=
 "\n$host" } $skip_inc = 1;}
 
-                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 3) ) && 
+                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 3) ) &&
 $Conf{BackupsDisable} == 0 )
-                { if ($no_backups_3 eq "NONE") { $no_backups_3 = "$host"} else { $no_backups_3 .= 
+                { if ($no_backups_3 eq "NONE") { $no_backups_3 = "$host"} else { $no_backups_3 .=
 "\n$host" } $skip_inc = 1;}
 
-                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 4) ) && 
+                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 4) ) &&
 $Conf{BackupsDisable} == 0 )
-                { if ($no_backups_4 eq "NONE") { $no_backups_4 = "$host"} else { $no_backups_4 .= 
+                { if ($no_backups_4 eq "NONE") { $no_backups_4 = "$host"} else { $no_backups_4 .=
 "\n$host" } $skip_inc = 1;}
 
-                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 5) ) && 
+                if ( (time() - $fullAge) > ( ($Conf{FullPeriod} * 86400) + (86400 * 5) ) &&
 $Conf{BackupsDisable} == 0 )
-                { if ($no_backups_5 eq "NONE") { $no_backups_5 = "$host"} else { $no_backups_5 .= 
+                { if ($no_backups_5 eq "NONE") { $no_backups_5 = "$host"} else { $no_backups_5 .=
 "\n$host" } $skip_inc = 1;}
 
-		# Check for Hosts that don't have backups (Incremental)		
-		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 2) ) && 
+		# Check for Hosts that don't have backups (Incremental)
+		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 2) ) &&
 $Conf{BackupsDisable} == 0 && $Conf{IncrKeepCnt} > 0 && $skip_inc == 0)
-		{ if ($no_backups_2 eq "NONE") { $no_backups_2 = "$host"} else { $no_backups_2 .= 
-"\n$host" } }
-		
-		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 3) ) && 
-$Conf{BackupsDisable} == 0 && $Conf{IncrKeepCnt} > 0 && $skip_inc == 0)
-                { if ($no_backups_3 eq "NONE") { $no_backups_3 = "$host"} else { $no_backups_3 .= 
+		{ if ($no_backups_2 eq "NONE") { $no_backups_2 = "$host"} else { $no_backups_2 .=
 "\n$host" } }
 
-		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 4) ) && 
+		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 3) ) &&
 $Conf{BackupsDisable} == 0 && $Conf{IncrKeepCnt} > 0 && $skip_inc == 0)
-                { if ($no_backups_4 eq "NONE") { $no_backups_4 = "$host"} else { $no_backups_4 .= 
+                { if ($no_backups_3 eq "NONE") { $no_backups_3 = "$host"} else { $no_backups_3 .=
 "\n$host" } }
 
-		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 5) ) && 
+		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 4) ) &&
 $Conf{BackupsDisable} == 0 && $Conf{IncrKeepCnt} > 0 && $skip_inc == 0)
-                { if ($no_backups_5 eq "NONE") { $no_backups_5 = "$host"} else { $no_backups_5 .= 
+                { if ($no_backups_4 eq "NONE") { $no_backups_4 = "$host"} else { $no_backups_4 .=
+"\n$host" } }
+
+		if ( (time() - $incrAge) > ( ($Conf{IncrPeriod} * 86400) + (86400 * 5) ) &&
+$Conf{BackupsDisable} == 0 && $Conf{IncrKeepCnt} > 0 && $skip_inc == 0)
+                { if ($no_backups_5 eq "NONE") { $no_backups_5 = "$host"} else { $no_backups_5 .=
 "\n$host" } }
 
 
@@ -220,12 +220,12 @@ $Conf{BackupsDisable} == 0 && $Conf{IncrKeepCnt} > 0 && $skip_inc == 0)
 	{ $Val{hostsAvgIncrSpeed} = ($total_speed_incr / $incrCnt2); }
 	$Val{hostsFullSize}  = $fullSizeTot;
 	$Val{hostsFullCount} = $fullCnt;
-        $Val{hostsIncrSize}  = $incrSizeTot;
-        $Val{hostsIncrCount} = $incrCnt;
+    $Val{hostsIncrSize}  = $incrSizeTot;
+    $Val{hostsIncrCount} = $incrCnt;
 	$Val{hostsNoBackups2} = $no_backups_2;
 	$Val{hostsNoBackups3} = $no_backups_3;
 	$Val{hostsNoBackups4} = $no_backups_4;
-	$Val{hostsNoBackups5} = $no_backups_5;	
+	$Val{hostsNoBackups5} = $no_backups_5;
 }
 
 sub pool_info
@@ -240,22 +240,22 @@ sub pool_info
 
 sub general_info
 {
-        $Val{startTime}                         = time() - $Info{startTime};
-        $Val{Version}                           = $Info{Version};
+    $Val{startTime}             = time() - $Info{startTime};
+    $Val{Version}               = $Info{Version};
 	$Val{ConfigLTime}			= time() - $Info{ConfigLTime};
 
 }
 
 sub queue_info
 {
-	while ( my ($key, $value) = each(%QueueLen) ) 
+	while ( my ($key, $value) = each(%QueueLen) )
 	{
 		if ($key =~ /Queue/)
 		{$Val{$key} = $QueueLen{$key};}
 	}
 }
 
-sub jobs_info 
+sub jobs_info
 {
         $Val{JobsIncr}  = 0;
         $Val{JobsFull}  = 0;
@@ -348,7 +348,7 @@ sub zabbix_config {
 	open(CONFIG,"/etc/zabbix/zabbix_agentd.conf");
 	foreach(<CONFIG>)
 	{
-		$zabbix_host = $1 if (/Hostname\s*=\s*(.*)/); 
+		$zabbix_host = $1 if (/Hostname\s*=\s*(.*)/);
 		$zabbix_server = $1 if (/Server\s*=\s*(.*)/);
 	}
 	close CONFIG;
@@ -366,50 +366,49 @@ sub zabbix_post {
 }
 
 
-sub var_config { 
-	
+sub var_config {
+
 	# Pool Info
 	$Var{poolFileCnt}     			= "backuppc.pool_file_count";
 	$Var{poolDirCnt}      			= "backuppc.pool_dir_count";
-	#$Var{poolFileCntRm}                	= "backuppc.pool_file_removed";
-        $Var{poolFileCntRep}                  	= "backuppc.pool_file_repeat";
-        $Var{poolFileRepMax}                	= "backuppc.pool_file_repeat_max";
-	$Var{poolFileLinkMax}                   = "backuppc.pool_file_link_max";
-        $Var{poolKb}            		= "backuppc.pool_size";
-        $Var{cpoolFileCnt}     			= "backuppc.cpool_file_count";
-        $Var{cpoolDirCnt}      			= "backuppc.cpool_dir_count";
-        #$Var{cpoolFileCntRm}                	= "backuppc.cpool_file_removed";
-        $Var{cpoolFileCntRep}                  	= "backuppc.cpool_file_repeat";
-        $Var{cpoolFileRepMax}                	= "backuppc.cpool_file_repeat_max";
-        $Var{cpoolFileLinkMax}                  = "backuppc.cpool_file_link_max";
-        $Var{cpoolKb}            		= "backuppc.cpool_size";
+    #$Var{poolFileCntRm}             = "backuppc.pool_file_removed";
+    $Var{poolFileCntRep}          	= "backuppc.pool_file_repeat";
+    $Var{poolFileRepMax}          	= "backuppc.pool_file_repeat_max";
+	$Var{poolFileLinkMax}           = "backuppc.pool_file_link_max";
+    $Var{poolKb}            		= "backuppc.pool_size";
+    $Var{cpoolFileCnt}     			= "backuppc.cpool_file_count";
+    $Var{cpoolDirCnt}      			= "backuppc.cpool_dir_count";
+    #$Var{cpoolFileCntRm}         	 = "backuppc.cpool_file_removed";
+    $Var{cpoolFileCntRep}          	= "backuppc.cpool_file_repeat";
+    $Var{cpoolFileRepMax}          	= "backuppc.cpool_file_repeat_max";
+    $Var{cpoolFileLinkMax}          = "backuppc.cpool_file_link_max";
+    $Var{cpoolKb}            		= "backuppc.cpool_size";
 
 	# General Stats
-        $Var{startTime}                         = "backuppc.uptime";
-        $Var{Version}                           = "backuppc.version";
-	$Var{ConfigLTime}			= "backuppc.config_load_time";
+    $Var{startTime}                 = "backuppc.uptime";
+    $Var{Version}                   = "backuppc.version";
+	$Var{ConfigLTime}			    = "backuppc.config_load_time";
 
 	# Queues
-        $Var{CmdQueue}                          = "backuppc.queue_command";
-        $Var{UserQueue}                         = "backuppc.queue_user";
-        $Var{BgQueue}                           = "backuppc.queue_background";
+    $Var{CmdQueue}                  = "backuppc.queue_command";
+    $Var{UserQueue}                 = "backuppc.queue_user";
+    $Var{BgQueue}                   = "backuppc.queue_background";
 
 	# Jobs
-        $Var{JobsIncr}                          = "backuppc.jobs_incr";
-        $Var{JobsFull}                          = "backuppc.jobs_full";
-        $Var{JobsOther}                         = "backuppc.jobs_other";
+    $Var{JobsIncr}                  = "backuppc.jobs_incr";
+    $Var{JobsFull}                  = "backuppc.jobs_full";
+    $Var{JobsOther}                 = "backuppc.jobs_other";
+
 
 	# Hosts
-        $Var{hostsAvgFullSpeed}                 = "backuppc.hosts_full_speed";
-        $Var{hostsAvgIncrSpeed}                 = "backuppc.hosts_incr_speed";
-        $Var{hostsFullSize}                     = "backuppc.hosts_full_size";
-        $Var{hostsFullCount}                    = "backuppc.hosts_full_count";
-        $Var{hostsIncrSize}                     = "backuppc.hosts_incr_size";
-        $Var{hostsIncrCount}                    = "backuppc.hosts_incr_count";
-	$Var{hostsNoBackups2}			= "backuppc.hosts_nobackup_2";
-	$Var{hostsNoBackups3}			= "backuppc.hosts_nobackup_3";
-	$Var{hostsNoBackups4}			= "backuppc.hosts_nobackup_4";
-	$Var{hostsNoBackups5}			= "backuppc.hosts_nobackup_5";
+        $Var{hostsAvgFullSpeed}     = "backuppc.hosts_full_speed";
+        $Var{hostsAvgIncrSpeed}     = "backuppc.hosts_incr_speed";
+        $Var{hostsFullSize}         =  "backuppc.hosts_full_size";
+        $Var{hostsFullCount}        = "backuppc.hosts_full_count";
+        $Var{hostsIncrSize}         = "backuppc.hosts_incr_size";
+        $Var{hostsIncrCount}        = "backuppc.hosts_incr_count";
+        $Var{hostsNoBackups2}	    = "backuppc.hosts_nobackup_2";
+        $Var{hostsNoBackups3}       = "backuppc.hosts_nobackup_3";
+        $Var{hostsNoBackups4}	    = "backuppc.hosts_nobackup_4";
+        $Var{hostsNoBackups5}	    = "backuppc.hosts_nobackup_5";
 }
-
-

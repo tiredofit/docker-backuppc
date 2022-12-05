@@ -1,3 +1,21 @@
+## 6.0.0 2022-12-05 <dave at tiredofit dot ca>
+
+This introduces breaking changes due to the deprecation of the BACKUPPC_UUID and BACKUPPC_GID environment variables. They have now been replaced with USER_BACKUPPC and GROUP_BACKUPPC respectively.
+Additionally, the defaults for volume mappings is going to change in an upcoming release. This release introduces the capabilities of altering them from current locations
+
+   ### Added
+      - Introduce CONFIG_PATH, DATA_PATH, LOG_PATH, SSH_KEY_PATH for customization on where you want to store bits related to this image. See README or code for defaults
+      - Switch to using container base image User and Group ID modifications (USER_BACKUPPC + GROUP_BACKUPPC)
+
+   ### Changed
+      - Rework Dockerfile to cleanup issues relating to installation, home directory creation (#13)
+      - Rework container initialization scripts splitting into functions / modernizing to latest tiredfoit base image
+
+   ### Reverted
+      - Removal of BACKUPPC_UUID variable (see New features for replacement)
+      - Removal of BACKUPPC_GUID variable (see new features for replacement)
+
+
 ## 5.3.16 2022-12-01 <dave at tiredofit dot ca>
 
    ### Changed

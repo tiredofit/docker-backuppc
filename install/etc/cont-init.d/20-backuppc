@@ -4,57 +4,11 @@ source /assets/functions/00-container
 prepare_service
 PROCESS_NAME="backuppc"
 
+bootstrap_filesystem
 create_zabbix backuppc
+generate_ssh_keys
+install_backuppc
+configure_ui
 
-print_notice "First run of the container. BackupPC will be installed."
-print_notice "If exist, configuration and data will be reused and upgraded as needed."
-
-# Create backuppc user
-addgroup -S -g "${BACKUPPC_GUID}" backuppc
-adduser -D -S -h /home/backuppc -G backuppc -u "${BACKUPPC_UUID}" backuppc
-addgroup zabbix backuppc
-mkdir -p /home/backuppc
-chown backuppc:backuppc /home/backuppc
-
-# Generate cryptographic keys
-if [ ! -f /home/backuppc/.ssh/id_rsa ]; then
-    print_notice "Creating RSA SSH key"
-	su backuppc -s /bin/sh -c "ssh-keygen -t rsa -b 4096 -N '' -f /home/backuppc/.ssh/id_rsa"
-fi
-
-if [ ! -f /home/backuppc/.ssh/id_ed25519 ]; then
-    print_notice "Creating ed25519 SSH key"
-	su backuppc -s /bin/sh -c "ssh-keygen -t ed25519 -o -a 100 -q -N '' -f /home/backuppc/.ssh/id_ed25519"
-fi
-
-# Extract BackupPC
-cd /usr/src
-tar xf BackupPC-"${BACKUPPC_VERSION}".tar.gz
-cd /usr/src/BackupPC-"${BACKUPPC_VERSION}"
-
-# Install BackupPC (existing configuration will be reused and upgraded)
-silent perl configure.pl \
-	--batch \
-	--config-dir /etc/backuppc \
-	--cgi-dir /www/cgi-bin/BackupPC \
-	--data-dir /var/lib/backuppc \
-	--hostname localhost \
-	--html-dir /www/html/BackupPC \
-	--html-dir-url /BackupPC \
-	--install-dir /usr/local/BackupPC \
-    --log-dir /www/logs/backuppc
-
-mkdir -p /www/logs/backuppc
-chown -R backuppc /www/logs/backuppc
-
-if [ -d /etc/BackupPC ]; then
-	chown -R backuppc /etc/BackupPC
-fi
-
-# Configure Web UI access
-sed -ie "s/^\$Conf{CgiAdminUsers}\s*=\s*'\w*'/\$Conf{CgiAdminUsers} = 'backuppc'/g" /etc/backuppc/config.pl
-
-rm -rf /usr/src/BackupPC-"${BACKUPPC_VERSION}".tar.gz /usr/src/BackupPC-"${BACKUPPC_VERSION}" /firstrun
-
-print_info "Container initialization complete"
+print_info "BackupPC ${BACKUPPC_VERSION} initialization complete, now starting web server on port ${NGINX_LISTEN_PORT}"
 liftoff

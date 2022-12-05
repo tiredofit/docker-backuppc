@@ -1,4 +1,4 @@
-version: '3.7'
+version: '2.4'
 services:
 
   backuppc-app:
@@ -6,11 +6,8 @@ services:
     container_name: backuppc-app
     labels:
       - traefik.enable=true
-      - traefik.frontend.rule=Host:backuppc.example.com
-      - traefik.port=80
-      - traefik.protocol=http
-      - traefik.docker.network=proxy
-      - traefik.backend=backuppc-app
+      - traefik.http.routers.backuppc.rule=Host(`backuppc.example.com`)
+      - traefik.http.services.backuppc.loadbalancer.server.port=80
     volumes:
       - ./data:/var/lib/backuppc
       - ./conf/etc/:/etc/backuppc
@@ -18,13 +15,13 @@ services:
       - ./logs:/www/logs
     environment:
       - CONTAINER_NAME=backuppc-app
-      - BACKUPPC_UUID=10000
-      - BACKUPPC_GUID=10000
-      
+      - USER_BACKUPPC=1000
+      - GROUP_BACKUPPC=1000
+
       - NGINX_AUTHENTICATION_TYPE=BASIC
       - NGINX_AUTHENTICATION_BASIC_USER1=backuppc
       - NGINX_AUTHENTICATION_BASIC_PASS1=backuppc
-      - DEBUG_MODE=TRUE
+      - DEBUG_MODE=FALSE
     networks:
       - proxy
       - services

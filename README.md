@@ -10,7 +10,7 @@
 * * *
 
 ## About
-This will build a Docker image for [BackupPC](https://backuppc.github.io/backuppc/) - A backup system.
+This will build a Docker image for [BackupPC](https://backuppc.github.io/backuppc/) - A highly performant backup system.
 
 ## Maintainer
 - [Dave Conroy](https://github.com/tiredofit)
@@ -25,11 +25,11 @@ This will build a Docker image for [BackupPC](https://backuppc.github.io/backupp
   - [Shell Access](#shell-access)
 
 ## Prerequisites and Assumptions
-*  Assumes you are using some sort of SSL terminating reverse proxy such as:
-   *  [Traefik](https://github.com/tiredofit/docker-traefik)
-   *  [Nginx](https://github.com/jc21/nginx-proxy-manager)
-   *  [Caddy](https://github.com/caddyserver/caddy)
-* Make sure there is adequate storage available to perform deduplicated backups!
+-  Assumes you are using some sort of SSL terminating reverse proxy such as:
+   -  [Traefik](https://github.com/tiredofit/docker-traefik)
+   -  [Nginx](https://github.com/jc21/nginx-proxy-manager)
+   -  [Caddy](https://github.com/caddyserver/caddy)
+- Make sure there is adequate storage available to perform deduplicated backups!
 
 
 ## Installation
@@ -66,12 +66,12 @@ The following image tags are available along with their tagged release based on 
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
-| Directory           | Description                                       |
-| ------------------- | ------------------------------------------------- |
-| `/var/lib/backuppc` | The backed up Data                                |
-| `/etc/backuppc`     | Configuration Files                               |
-| `/home/backuppc`    | Home Directory for Backuppc (SSH Keys)            |
-| `/www/logs`         | Logfiles for Nginx, Supervisord, BackupPC, Zabbix |
+| Directory           | Description                            |
+| ------------------- | -------------------------------------- |
+| `/etc/backuppc`     | Configuration Files                    |
+| `/home/backuppc`    | Home Directory for Backuppc (SSH Keys) |
+| `/var/lib/backuppc` | The backed up Data                     |
+| `/www/logs`         | Logfiles for Nginx, BackupPC           |
 
 ### Environment Variables
 
@@ -86,14 +86,21 @@ Be sure to view the following repositories to understand all the customizable op
 | [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
 | [Nginx](https://github.com/tiredofit/docker-nginx/)    | Nginx webserver                        |
 
-| Variable        | Description                                |
-| --------------- | ------------------------------------------ |
-| `BACKUPPC_UUID` | The uid for the backuppc user e.g. `10000` |
-| `BACKUPPC_GUID` | The gid for the backuppc user e.g. `10000` |
+#### Container Options
+
+| Variable         | Description                            | Default                |
+| ---------------- | -------------------------------------- | ---------------------- |
+| `USER_BACKUPPC`  | The uid for the backuppc user  | `1000`                 |
+| `GROUP_BACKUPPC` | The gid for the backuppc user | `1000`                 |
+| `CONFIG_PATH`    | BackupPC Configuration Files           | `/etc/backuppc`        |
+| `DATA_PATH`      | BackupPC data backups                  | `/var/lib/backuppc`    |
+| `LOG_PATH`       | Logfiles for BackupPC                  | `/www/logs/backuppc`   |
+| `SSH_KEYS_PATH`  | SSH Keys Path                          | `/home/.backuppc/.ssh` |
+
 
 #### Authentication
 
-By default, this image does not use authentication. This is definitely not recommended on a production environment! Based on the environment variables from the Nginx Base Image you can set them here:
+By default, this image does not use authentication. This is definitely not recommended on a production environment! Based on the environment variables from the [Nginx Base Image](https://github.com/tiredofit/docker-nginx/) you can set them here:
 
 It's highly recommend you set at minimum:
 
@@ -131,6 +138,7 @@ When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit a
 #### SMTP Options
 
 See the [MSMTP Configuration Options](https://marlam.de/msmtp/msmtp.html) for further information on options to configure MSMTP.
+
 | Parameter             | Description                                       | Default         |
 | --------------------- | ------------------------------------------------- | --------------- |
 | `SMTP_AUTO_FROM`      | Add setting to support sending through Gmail SMTP | `FALSE`         |
@@ -144,6 +152,7 @@ See the [MSMTP Configuration Options](https://marlam.de/msmtp/msmtp.html) for fu
 | `SMTP_TLS`            | Use TLS                                           | `FALSE`         |
 | `SMTP_STARTTLS`       | Start TLS from within session                     | `FALSE`         |
 | `SMTP_TLSCERTCHECK`   | Check remote certificate                          | `FALSE`         |
+
 ### Networking
 
 The following ports are exposed and available to public interfaces
@@ -160,15 +169,18 @@ The following ports are exposed and available to public interfaces
 
 For debugging and maintenance purposes you may want access the containers shell.
 
-``bash
+````bash
 docker exec -it (whatever your container name is) bash
-``
+````
+
 ## Support
 
 These images were built to serve a specific need in a production environment and gradually have had more functionality added based on requests from the community.
+
 ### Usage
 - The [Discussions board](../../discussions) is a great place for working with the community on tips and tricks of using this image.
 - Consider [sponsoring me](https://github.com/sponsors/tiredofit) personalized support.
+
 ### Bugfixes
 - Please, submit a [Bug Report](issues/new) if something isn't working as expected. I'll do my best to issue a fix in short order.
 
