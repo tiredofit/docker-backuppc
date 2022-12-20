@@ -1,3 +1,9 @@
+## 6.0.1 2022-12-20 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Rollback to using Alpine 3.16 (Perl 5.34.1) due to compatibility issues
+
+
 ## 6.0.0 2022-12-05 <dave at tiredofit dot ca>
 
 This introduces breaking changes due to the deprecation of the BACKUPPC_UUID and BACKUPPC_GID environment variables. They have now been replaced with USER_BACKUPPC and GROUP_BACKUPPC respectively.

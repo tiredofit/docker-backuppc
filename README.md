@@ -1,7 +1,7 @@
 # github.com/tiredofit/docker-backuppc
 
 [![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-backuppc?style=flat-square)](https://github.com/tiredofit/docker-backuppc/releases/latest)
-[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-backuppc/build?style=flat-square)](https://github.com/tiredofit/docker-backuppc/actions?query=workflow%3Abuild)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/tiredofit/docker-backuppc/main.yml?branch=main&style=flat-square)](https://github.com/tiredofit/docker-backuppc/actions)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/backuppc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/backuppc/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/backuppc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/backuppc/)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
@@ -88,14 +88,14 @@ Be sure to view the following repositories to understand all the customizable op
 
 #### Container Options
 
-| Variable         | Description                            | Default                |
-| ---------------- | -------------------------------------- | ---------------------- |
-| `USER_BACKUPPC`  | The uid for the backuppc user  | `1000`                 |
+| Variable         | Description                   | Default                |
+| ---------------- | ----------------------------- | ---------------------- |
+| `USER_BACKUPPC`  | The uid for the backuppc user | `1000`                 |
 | `GROUP_BACKUPPC` | The gid for the backuppc user | `1000`                 |
-| `CONFIG_PATH`    | BackupPC Configuration Files           | `/etc/backuppc`        |
-| `DATA_PATH`      | BackupPC data backups                  | `/var/lib/backuppc`    |
-| `LOG_PATH`       | Logfiles for BackupPC                  | `/www/logs/backuppc`   |
-| `SSH_KEYS_PATH`  | SSH Keys Path                          | `/home/.backuppc/.ssh` |
+| `CONFIG_PATH`    | BackupPC Configuration Files  | `/etc/backuppc`        |
+| `DATA_PATH`      | BackupPC data backups         | `/var/lib/backuppc`    |
+| `LOG_PATH`       | Logfiles for BackupPC         | `/www/logs/backuppc`   |
+| `SSH_KEYS_PATH`  | SSH Keys Path                 | `/home/.backuppc/.ssh` |
 
 
 #### Authentication
