@@ -38,11 +38,17 @@ This will build a Docker image for [BackupPC](https://backuppc.github.io/backupp
 Clone this repository and build the image with `docker build -t (imagename) .`
 
 ### Prebuilt Images
-Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/backuppc) and is the recommended method of installation.
+Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/backuppc)
 
 ```bash
-docker pull tiredofit/backuppc:(imagetag)
+docker pull docker.io/tiredofdit/backuppc:(imagetag)
 ```
+
+Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-backuppc/pkgs/container/docker-backuppc) 
+ 
+```
+docker pull ghcr.io/tiredofit/docker-backuppc/pkgs/container/docker-backuppc):(imagetag)
+``` 
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
@@ -179,7 +185,7 @@ These images were built to serve a specific need in a production environment and
 
 ### Usage
 - The [Discussions board](../../discussions) is a great place for working with the community on tips and tricks of using this image.
-- Consider [sponsoring me](https://github.com/sponsors/tiredofit) personalized support.
+- Consider [sponsoring me](https://github.com/sponsors/tiredofit) for personalized support
 
 ### Bugfixes
 - Please, submit a [Bug Report](issues/new) if something isn't working as expected. I'll do my best to issue a fix in short order.
