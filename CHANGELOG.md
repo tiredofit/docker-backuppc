@@ -1,3 +1,9 @@
+## 6.0.2 2023-03-06 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Add libgomp to suppoer executing PAR2
+
+
 ## 6.0.1 2022-12-20 <dave at tiredofit dot ca>
 
    ### Changed

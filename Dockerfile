@@ -58,6 +58,7 @@ RUN source /assets/functions/00-container && \
                 gzip \
                 fcgiwrap \
                 iputils \
+                libgomp \
                 openssh \
                 openssl \
                 perl \
