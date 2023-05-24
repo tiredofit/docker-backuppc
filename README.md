@@ -41,7 +41,7 @@ Clone this repository and build the image with `docker build -t (imagename) .`
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/backuppc)
 
 ```bash
-docker pull docker.io/tiredofdit/backuppc:(imagetag)
+docker pull docker.io/tiredofit/backuppc:(imagetag)
 ```
 
 Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-backuppc/pkgs/container/docker-backuppc) 
